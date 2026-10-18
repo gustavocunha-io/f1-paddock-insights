@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='classificacao.css') }}">
+    <title>Classificação</title>
+</head>
+<body>
+    <div class="tabela-classificacao">
+        <table id="tabela">
+        <tr>
+            <th>Posicão</th>
+            <th>Nome</th>
+            <th>Pontos</th>
+        </tr>
+        {% for piloto in classificacao %}
+            <tr>
+                <th>{{ piloto.posicao }}</th>
+                <th>{{ piloto.nome }}</th>
+                <th>{{ piloto.pontos }}</th>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+</body>
+</html>

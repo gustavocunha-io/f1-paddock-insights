@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% if piloto %}
+        <div style="border-top: 5px solid #{{ piloto.cor_equipe }}; padding: 20px;">
+            <h1>Paddock AI</h1>
+            <h2>Equipe: {{ piloto.equipe }}</h2>
+        
+            {% if piloto.foto_url %}
+                <img src="{{ piloto.foto_url }}" width="100px" alt="Foto do Piloto">
+            {% else %}
+                <p>Foto não disponível</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
