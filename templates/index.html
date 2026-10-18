@@ -3,15 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Paddock</title>
 </head>
 <body>
-    <form action="/exibir" method="post">
-        <label for="nome-piloto">Nome do Piloto: <input type="text" name="piloto" id="nome-piloto"></label>
-        <select name="analise" id="tom-analise">
-            <option value="engenheiro de pista serio">Engenheiro de Pista Sério</option>
-            <option value="narrador emocionado">Narrador Emocionado</option>    
-        </select>
+    {% include 'cabecalho.html' %}
+    <form method="POST" action="/exibir">
+        <div>
+            <label for="nome-piloto">Nome do Piloto:</label>
+            <input type="text" name="nome-piloto" id="nome-piloto">
+        </div>
+
+        <div>
+            <select name="analise" id="tom-analise">
+                <option value="engenheiro de pista serio">Engenheiro de Pista Sério</option>
+                <option value="narrador emocionado">Narrador Emocionado</option>    
+            </select>
+        </div>
+
         <input type="submit" value="Buscar">
     </form>
 </body>

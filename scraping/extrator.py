@@ -4,16 +4,65 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 from constantes import *
 import requests
+import time
 import re
 
 def obter_conteudo_pagina(url:str, headers) -> str:
     return requests.get(url, headers=headers).text
 
-def obter_noticias():
-    pass
+def obter_noticias(nome_piloto:str):
+    """
+        Busca todas as notícias de acordo com o nome do piloto e retorna uma lista de dicionários
+        que contêm dados como título e o conteúdo.
+    """
+    
+    conteudo_pagina:str = obter_conteudo_pagina(URL_F1, HEADERS)
+    soup:BeautifulSoup = BeautifulSoup(conteudo_pagina, "html.parser")
+    div_noticias = soup.find(class_= re.compile(r"mt-\d+ wp-block-grande-premio-news-grid"))
+    article_noticias = div_noticias.select("article a")[:10]
+    noticias_piloto_list = []
 
-# Obtêm os dados da classificação dos pilotos utilizando soup com expressão regular para realizar a filtragem.
+    for noticia in article_noticias:
+        link = noticia.get("href")
+
+        if nome_piloto.lower() in link:
+            time.sleep(2) # Evitar bloqueios por DDOS
+            noticias_piloto_list.append(obter_conteudo_interno(link))
+
+    print(len(noticias_piloto_list))
+
+    return noticias_piloto_list
+
+def obter_conteudo_interno(url):
+    """ 
+        Obtêm o conteúdo da página passada por parâmetro, realiza a raspagem e retorna um
+        dicionário contendo as informações da noticia como o título e o conteúdo da mesma.
+    """
+    conteudo_interno_pagina:str = obter_conteudo_pagina(url, HEADERS)
+    soup:BeautifulSoup = BeautifulSoup(conteudo_interno_pagina, "html.parser")
+
+    materia = soup.find(class_="materia")
+    
+    cabecalho = materia.find("header")
+    tag_titulo = cabecalho.find("h1")
+    titulo = tag_titulo.text.strip()
+    
+    conteudo_bruto = soup.find("article")
+    paragrafos_conteudo = conteudo_bruto.find_all(class_="wp-block-paragraph")
+    conteudo_limpo = [paragrafo.get_text(strip=True) for paragrafo in paragrafos_conteudo]
+    conteudo_completo = "\n\n".join(conteudo_limpo)
+
+    return {
+        "titulo": titulo,
+        "conteudo": conteudo_completo
+    }
+
 def obter_classificacao_pilotos() -> list[ClassificacaoPilotos]:
+    """
+        Obtêm os dados da classificação dos pilotos utilizando soup com expressão regular 
+        para realizar a filtragem.
+    """
+
     conteudo_pagina:str = obter_conteudo_pagina(URL_CLASSIFICACAO, HEADERS)
     soup:BeautifulSoup = BeautifulSoup(conteudo_pagina, "html.parser")
     tabela = soup.find(class_="gp-standings-page")
