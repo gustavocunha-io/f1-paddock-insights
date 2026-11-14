@@ -1,23 +1,285 @@
+/* CABECALHO.CSS - STRICT MOBILE-FIRST ARCHITECTURE */
+
+:root {
+    --f1-red: #e10600;
+    --f1-red-dark: #b30000;
+    --f1-red-glow: rgba(225, 6, 0, 0.45);
+    --f1-black: #0b0c10;
+    --f1-asphalt: #101117;
+    --f1-dark-card: #15161e;
+    --f1-card-hover: #1c1d27;
+    --f1-border: #282a36;
+    --f1-text-light: #f8f9fa;
+    --f1-text-muted: #94959b;
+    --f1-gold: #ffd700;
+    --f1-green-live: #00d26a;
+    --f1-font-racing: 'Titillium Web', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    --f1-font-tech: 'Orbitron', monospace;
+}
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-nav {
+body {
+    background-color: var(--f1-black);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(225, 6, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(225, 6, 0, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+    color: var(--f1-text-light);
+    font-family: var(--f1-font-racing);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   MOBILE-FIRST BASE STYLES (< 768px - Celulares & Telas Pequenas)
+   ========================================================================== */
+
+.f1-header {
+    background: linear-gradient(180deg, #181922 0%, #111218 100%);
+    border-bottom: 1px solid var(--f1-border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
+.f1-header-container {
+    width: 100%;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BRAND LOGO */
+.f1-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    justify-content: center;
+}
+
+.f1-logo-container {
+    background: var(--f1-red);
+    padding: 4px 10px;
+    border-radius: 4px;
+    transform: skew(-12deg);
+    box-shadow: 0 0 12px var(--f1-red-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f1-badge {
+    color: #fff;
+    font-family: var(--f1-font-tech);
+    font-weight: 900;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-style: italic;
+    transform: skew(12deg);
+    display: inline-block;
+}
+
+.f1-brand-content {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.f1-brand-text {
+    font-size: 1.15rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    color: #ffffff;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.f1-brand-accent {
+    color: var(--f1-red);
+}
+
+.f1-brand-sub {
+    font-size: 0.58rem;
+    font-family: var(--f1-font-tech);
+    letter-spacing: 0.16em;
+    color: var(--f1-text-muted);
+    text-transform: uppercase;
+}
+
+/* NAVIGATION LINKS - OTIMIZADOS PARA TOQUE (TOUCH-FRIENDLY >= 44px) */
+.f1-nav-links {
     display: flex;
     width: 100%;
-    height: 50px;
-
-    align-items: center;
-    
-    background: #773333;
+    justify-content: center;
+    gap: 8px;
 }
 
-a {
-    margin: 15px;
+.f1-nav-item {
+    display: flex;
     align-items: center;
-    
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    max-width: 180px;
+    min-height: 44px; /* Altura mínima recomendada para toque no mobile */
+    padding: 8px 12px;
     text-decoration: none;
-    color: #fff;
+    color: var(--f1-text-muted);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.2s ease;
+}
+
+.f1-nav-item:active {
+    transform: scale(0.97);
+    background: rgba(225, 6, 0, 0.25);
+    border-color: var(--f1-red);
+    color: #ffffff;
+}
+
+.f1-nav-icon {
+    font-size: 1rem;
+}
+
+/* STATUS PILL (Compacto no Mobile) */
+.f1-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 210, 106, 0.3);
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.65rem;
+}
+
+.f1-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--f1-green-live);
+    box-shadow: 0 0 6px var(--f1-green-live);
+    animation: f1-pulse 2s infinite;
+}
+
+.f1-status-text {
+    font-family: var(--f1-font-tech);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--f1-green-live);
+}
+
+@keyframes f1-pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 210, 106, 0.7); }
+    70% { transform: scale(1.1); box-shadow: 0 0 0 5px rgba(0, 210, 106, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 210, 106, 0); }
+}
+
+/* SPEED STRIPE */
+.f1-speed-stripe {
+    height: 3px;
+    width: 100%;
+    display: flex;
+    background: #111;
+}
+
+.f1-stripe-accent {
+    height: 100%;
+    flex: 1;
+    background: linear-gradient(90deg, #e10600 0%, #ff1801 60%, #ffd700 100%);
+}
+
+.f1-stripe-checkers {
+    width: 50px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        #ffffff,
+        #ffffff 3px,
+        #000000 3px,
+        #000000 6px
+    );
+}
+
+/* ==========================================================================
+   PROGRESSIVE ENHANCEMENT: TABLET & DESKTOP (>= 768px)
+   ========================================================================== */
+@media (min-width: 768px) {
+    .f1-header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 12px 24px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .f1-brand {
+        justify-content: flex-start;
+    }
+
+    .f1-brand-text {
+        font-size: 1.25rem;
+    }
+
+    .f1-brand-sub {
+        font-size: 0.65rem;
+    }
+
+    .f1-nav-links {
+        width: auto;
+        gap: 12px;
+    }
+
+    .f1-nav-item {
+        flex: none;
+        max-width: none;
+        min-height: auto;
+        padding: 8px 16px;
+        font-size: 0.92rem;
+        background: transparent;
+        border-color: transparent;
+    }
+
+    .f1-nav-item:hover {
+        color: #ffffff;
+        background: rgba(225, 6, 0, 0.12);
+        border-color: rgba(225, 6, 0, 0.3);
+        box-shadow: 0 0 12px rgba(225, 6, 0, 0.2);
+    }
+
+    .f1-status-pill {
+        padding: 6px 14px;
+    }
+
+    .f1-status-text {
+        font-size: 0.72rem;
+    }
+
+    .f1-speed-stripe {
+        height: 4px;
+    }
+
+    .f1-stripe-checkers {
+        width: 80px;
+    }
 }

@@ -3,25 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Paddock AI - Telemetria & Estratégia de Corrida</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <title>Paddock</title>
 </head>
 <body>
     {% include 'cabecalho.html' %}
-    <form method="POST" action="/exibir">
-        <div>
-            <label for="nome-piloto">Nome do Piloto:</label>
-            <input type="text" name="nome-piloto" id="nome-piloto">
-        </div>
 
-        <div>
-            <select name="analise" id="tom-analise">
-                <option value="engenheiro de pista serio">Engenheiro de Pista Sério</option>
-                <option value="narrador emocionado">Narrador Emocionado</option>    
-            </select>
-        </div>
+    <main class="main-wrapper">
+        <!-- HERO BANNER -->
+        <section class="hero-section">
+            <div class="hero-badge">
+                <span class="live-indicator"></span>
+                <span>FIA FORMULA ONE WORLD CHAMPIONSHIP™ // PIT WALL COMMS</span>
+            </div>
+            <h1 class="hero-title">
+                SISTEMA DE TELEMETRIA <br>
+                <span class="gradient-text">& ESTRATÉGIA COM IA</span>
+            </h1>
+            <p class="hero-description">
+                Conecte os dados oficiais da <strong>OpenF1</strong>, notícias raspadas em tempo real do <strong>Grande Prêmio</strong> e análises táticas inteligentes alimentadas pelo <strong>Google Gemini</strong>.
+            </p>
+        </section>
 
-        <input type="submit" value="Buscar">
-    </form>
+        <!-- TELEMETRY FORM CARD -->
+        <section class="paddock-control-card">
+            <div class="card-header">
+                <div class="card-header-left">
+                    <span class="header-led"></span>
+                    <h2 class="card-title">CONFIGURAÇÃO DE TELEMETRIA</h2>
+                </div>
+                <div class="card-header-badge">CANAL SEGURO</div>
+            </div>
+
+            <form method="POST" action="/dados" id="telemetry-form" class="telemetry-form">
+                
+                <!-- DRIVER INPUT -->
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="nome-piloto" class="form-label">
+                            <span class="label-icon">🏎️</span> PILOTO DO GRID:
+                        </label>
+                        <span class="label-hint">Digite o nome ou sobrenome</span>
+                    </div>
+
+                    <div class="input-container">
+                        <input 
+                            type="text" 
+                            name="nome-piloto" 
+                            id="nome-piloto" 
+                            list="pilotos-sugestoes"
+                            placeholder="Ex: Verstappen, Hamilton, Norris, Leclerc..." 
+                            required
+                            autocomplete="off"
+                            class="f1-input"
+                        >
+                        <datalist id="pilotos-sugestoes">
+                            <option value="Verstappen">Max Verstappen (Red Bull)</option>
+                            <option value="Hamilton">Lewis Hamilton (Ferrari)</option>
+                            <option value="Norris">Lando Norris (McLaren)</option>
+                            <option value="Leclerc">Charles Leclerc (Ferrari)</option>
+                            <option value="Russell">George Russell (Mercedes)</option>
+                            <option value="Antonelli">Andrea Kimi Antonelli (Mercedes)</option>
+                            <option value="Piastri">Oscar Piastri (McLaren)</option>
+                            <option value="Alonso">Fernando Alonso (Aston Martin)</option>
+                            <option value="Sainz">Carlos Sainz (Williams)</option>
+                            <option value="Gasly">Pierre Gasly (Alpine)</option>
+                            <option value="Albon">Alexander Albon (Williams)</option>
+                            <option value="Bortoleto">Gabriel Bortoleto (Audi)</option>
+                            <option value="Tsunoda">Yuki Tsunoda (RB)</option>
+                        </datalist>
+                    </div>
+
+                    <!-- QUICK SELECT PILLS -->
+                    <div class="quick-select">
+                        <span class="quick-title">Acesso rápido ao grid:</span>
+                        <div class="pills-container">
+                            <button type="button" class="driver-pill" data-driver="Verstappen">Verstappen</button>
+                            <button type="button" class="driver-pill" data-driver="Hamilton">Hamilton</button>
+                            <button type="button" class="driver-pill" data-driver="Norris">Norris</button>
+                            <button type="button" class="driver-pill" data-driver="Leclerc">Leclerc</button>
+                            <button type="button" class="driver-pill" data-driver="Russell">Russell</button>
+                            <button type="button" class="driver-pill" data-driver="Antonelli">Antonelli</button>
+                            <button type="button" class="driver-pill" data-driver="Piastri">Piastri</button>
+                            <button type="button" class="driver-pill" data-driver="Alonso">Alonso</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TONE SELECTOR -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-icon">🎙️</span> PERSONALIDADE DO RÁDIO / ANÁLISE:
+                    </label>
+
+                    <div class="tone-cards-grid">
+                        <label class="tone-card active">
+                            <input type="radio" name="analise" value="engenheiro de pista serio" checked>
+                            <div class="tone-card-content">
+                                <div class="tone-icon">🔧</div>
+                                <div class="tone-info">
+                                    <h3 class="tone-title">Engenheiro de Pista</h3>
+                                    <p class="tone-desc">Telemetria cirúrgica, dados frios de corrida, conservação de pneus e estratégia de boxes.</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="tone-card">
+                            <input type="radio" name="analise" value="narrador emocionado">
+                            <div class="tone-card-content">
+                                <div class="tone-icon">🎙️</div>
+                                <div class="tone-info">
+                                    <h3 class="tone-title">Narrador Emocionado</h3>
+                                    <p class="tone-desc">Adrenalina a mil, coração acelerado na ponta da luva e narração cinematográfica!</p>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="tone-card">
+                            <input type="radio" name="analise" value="comentarista zoeiro">
+                            <div class="tone-card-content">
+                                <div class="tone-icon">🏁</div>
+                                <div class="tone-info">
+                                    <h3 class="tone-title">Comentarista Corneta</h3>
+                                    <p class="tone-desc">Ironia de paddock, apelidos para carros lentos e zoeira ácida sem filtros.</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <div class="form-action">
+                    <button type="submit" id="submit-btn" class="f1-submit-btn">
+                        <span class="btn-text">INICIAR TELEMETRIA & ESTRATÉGIA</span>
+                        <span class="btn-icon">⚡</span>
+                    </button>
+                </div>
+
+                <!-- LOADING OVERLAY / FEEDBACK -->
+                <div id="loading-state" class="loading-state" style="display: none;">
+                    <div class="f1-lights-container">
+                        <div class="light-dot red"></div>
+                        <div class="light-dot red"></div>
+                        <div class="light-dot red"></div>
+                        <div class="light-dot red"></div>
+                        <div class="light-dot red"></div>
+                    </div>
+                    <p class="loading-text">INTERLIGANDO OPENF1 + WEB SCRAPING + GOOGLE GEMINI...</p>
+                    <p class="loading-subtext">Aguarde a transmissão do Pit Wall</p>
+                </div>
+            </form>
+        </section>
+
+        <!-- TECH STACK INFO GRID -->
+        <section class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-header">
+                    <span class="tech-icon">📡</span>
+                    <span class="tech-tag">API PÚBLICA</span>
+                </div>
+                <h3>OpenF1 API</h3>
+                <p>Extração oficial de dados dos pilotos, fotos, numeração, escuderias e códigos das equipes da F1.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-header">
+                    <span class="tech-icon">🌐</span>
+                    <span class="tech-tag">WEB SCRAPING</span>
+                </div>
+                <h3>Grande Prêmio</h3>
+                <p>Raspagem em tempo real das manchetes esportivas e da tabela de classificação oficial atualizada.</p>
+            </div>
+
+            <div class="tech-card">
+                <div class="tech-header">
+                    <span class="tech-icon">🧠</span>
+                    <span class="tech-tag">INTELIGÊNCIA ARTIFICIAL</span>
+                </div>
+                <h3>Google Gemini</h3>
+                <p>Geração de relatórios com humor, tom tático e análise adaptada aos dados raspados da pista.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="f1-footer">
+        <p>F1 Paddock AI • Trabalho Prático de Web Services • Desenvolvido para Fãs de Motorsport</p>
+    </footer>
+
+    <!-- INTERACTION SCRIPT -->
+    <script>
+        // Driver pill selection
+        document.querySelectorAll('.driver-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const driverInput = document.getElementById('nome-piloto');
+                driverInput.value = pill.getAttribute('data-driver');
+                driverInput.focus();
+
+                // Highlight active pill
+                document.querySelectorAll('.driver-pill').forEach(p => p.classList.remove('selected'));
+                pill.classList.add('selected');
+            });
+        });
+
+        // Tone card selection styling
+        document.querySelectorAll('.tone-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.tone-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+
+        // Form submit loading animation
+        const form = document.getElementById('telemetry-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const loadingState = document.getElementById('loading-state');
+
+        form.addEventListener('submit', () => {
+            submitBtn.style.display = 'none';
+            loadingState.style.display = 'flex';
+        });
+    </script>
 </body>
 </html>

@@ -3,26 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação Oficial de Pilotos - F1 Paddock</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='classificacao.css') }}">
-    <title>Classificação</title>
 </head>
 <body>
     {% include 'cabecalho.html' %}
-    <div class="tabela-classificacao">
-        <table id="tabela">
-        <tr>
-            <th>Posicão</th>
-            <th>Nome</th>
-            <th>Pontos</th>
-        </tr>
-        {% for piloto in classificacao %}
-            <tr>
-                <th>{{ piloto.posicao }}</th>
-                <th>{{ piloto.nome }}</th>
-                <th>{{ piloto.pontos }}</th>
-            </tr>
-        {% endfor %}
-    </table>
-    </div>
+
+    <main class="classificacao-container">
+        <!-- HEADER -->
+        <header class="section-header">
+            <div class="f1-tag-row">
+                <span class="live-tag">● DADOS AO VIVO</span>
+                <span class="season-tag">CAMPEONATO MUNDIAL DE FÓRMULA 1</span>
+            </div>
+            <h1 class="page-title">
+                CLASSIFICAÇÃO GERAL <span class="gradient-text">DE PILOTOS</span>
+            </h1>
+            <p class="page-subtitle">
+                Tabela oficial sincronizada via Web Scraping com o portal <strong>Grande Prêmio</strong>.
+            </p>
+        </header>
+
+        {% if classificacao and classificacao|length >= 3 %}
+        <!-- PODIUM SHOWCASE -->
+        <section class="podium-section">
+            <!-- P2 SILVER -->
+            <div class="podium-card p2">
+                <div class="podium-rank">2</div>
+                <div class="podium-medal silver">🥈 2º LUGAR</div>
+                <h3 class="podium-name">{{ classificacao[1].nome }}</h3>
+                <span class="podium-team">{{ classificacao[1].equipe }} • {{ classificacao[1].pais }}</span>
+                <div class="podium-pts">{{ classificacao[1].pontos }} <span class="pts-unit">PTS</span></div>
+                <form method="POST" action="/dados" class="podium-form">
+                    <input type="hidden" name="nome-piloto" value="{{ classificacao[1].nome }}">
+                    <input type="hidden" name="analise" value="engenheiro de pista serio">
+                    <button type="submit" class="podium-action-btn">Analisar Piloto 🏎️</button>
+                </form>
+            </div>
+
+            <!-- P1 GOLD -->
+            <div class="podium-card p1">
+                <div class="leader-crown">👑 LÍDER</div>
+                <div class="podium-rank">1</div>
+                <div class="podium-medal gold">🥇 1º LUGAR</div>
+                <h3 class="podium-name">{{ classificacao[0].nome }}</h3>
+                <span class="podium-team">{{ classificacao[0].equipe }} • {{ classificacao[0].pais }}</span>
+                <div class="podium-pts">{{ classificacao[0].pontos }} <span class="pts-unit">PTS</span></div>
+                <form method="POST" action="/dados" class="podium-form">
+                    <input type="hidden" name="nome-piloto" value="{{ classificacao[0].nome }}">
+                    <input type="hidden" name="analise" value="narrador emocionado">
+                    <button type="submit" class="podium-action-btn gold-btn">Analisar Líder ⚡</button>
+                </form>
+            </div>
+
+            <!-- P3 BRONZE -->
+            <div class="podium-card p3">
+                <div class="podium-rank">3</div>
+                <div class="podium-medal bronze">🥉 3º LUGAR</div>
+                <h3 class="podium-name">{{ classificacao[2].nome }}</h3>
+                <span class="podium-team">{{ classificacao[2].equipe }} • {{ classificacao[2].pais }}</span>
+                <div class="podium-pts">{{ classificacao[2].pontos }} <span class="pts-unit">PTS</span></div>
+                <form method="POST" action="/dados" class="podium-form">
+                    <input type="hidden" name="nome-piloto" value="{{ classificacao[2].nome }}">
+                    <input type="hidden" name="analise" value="engenheiro de pista serio">
+                    <button type="submit" class="podium-action-btn">Analisar Piloto 🏎️</button>
+                </form>
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- TABLE SECTION -->
+        <section class="table-section">
+            <div class="table-controls">
+                <div class="table-title-wrap">
+                    <span class="control-led"></span>
+                    <h2 class="table-title">GRID COMPLETO // TIMING DE TEMPORADA</h2>
+                </div>
+                <div class="search-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="filter-input" placeholder="Filtrar por piloto, equipe ou país..." class="filter-input">
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="f1-standings-table" class="f1-table">
+                    <thead>
+                        <tr>
+                            <th class="col-pos">POS</th>
+                            <th class="col-driver">PILOTO</th>
+                            <th class="col-team">EQUIPE</th>
+                            <th class="col-country">PAÍS</th>
+                            <th class="col-points">PONTOS</th>
+                            <th class="col-action">ANÁLISE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for piloto in classificacao %}
+                        <tr class="table-row {% if piloto.posicao == 1 %}pos-1{% elif piloto.posicao == 2 %}pos-2{% elif piloto.posicao == 3 %}pos-3{% endif %}">
+                            <td class="col-pos">
+                                <span class="pos-badge">{{ piloto.posicao }}</span>
+                            </td>
+                            <td class="col-driver">
+                                <span class="driver-name">{{ piloto.nome }}</span>
+                            </td>
+                            <td class="col-team">
+                                <span class="team-tag">{{ piloto.equipe }}</span>
+                            </td>
+                            <td class="col-country">
+                                <span class="country-tag">{{ piloto.pais }}</span>
+                            </td>
+                            <td class="col-points">
+                                <span class="pts-number">{{ piloto.pontos }}</span>
+                                <span class="pts-sub">PTS</span>
+                            </td>
+                            <td class="col-action">
+                                <form method="POST" action="/dados" class="inline-analyze-form">
+                                    <input type="hidden" name="nome-piloto" value="{{ piloto.nome }}">
+                                    <input type="hidden" name="analise" value="engenheiro de pista serio">
+                                    <button type="submit" class="table-action-btn" title="Analisar telemetria deste piloto">
+                                        <span>Analisar</span> ⚡
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="f1-footer">
+        <p>F1 Paddock AI • Dados Oficiais Extraídos do Grande Prêmio • Atualizações 2026</p>
+    </footer>
+
+    <!-- LIVE FILTER SCRIPT -->
+    <script>
+        const filterInput = document.getElementById('filter-input');
+        const rows = document.querySelectorAll('#f1-standings-table tbody tr');
+
+        filterInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

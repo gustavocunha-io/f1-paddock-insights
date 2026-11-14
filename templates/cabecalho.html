@@ -1,7 +1,38 @@
-<nav>
-    <link rel="stylesheet" href="{{ url_for('static', filename='cabecalho.css') }}">
-    <div>
-        <a href="/">Início</a>
-        <a href="/classificacao">Classificação</a>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Orbitron:wght@500;700;900&family=Titillium+Web:ital,wght@0,400;0,600;0,700;0,900;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='cabecalho.css') }}">
+
+<header class="f1-header">
+    <div class="f1-header-container">
+        <a href="/" class="f1-brand" title="Voltar ao início">
+            <div class="f1-logo-container">
+                <span class="f1-badge">F1</span>
+            </div>
+            <div class="f1-brand-content">
+                <span class="f1-brand-text">PADDOCK <span class="f1-brand-accent">AI</span></span>
+                <span class="f1-brand-sub">TELEMETRY & STRATEGY</span>
+            </div>
+        </a>
+
+        <nav class="f1-nav-links">
+            <a href="/" class="f1-nav-item">
+                <span class="f1-nav-icon">🏎️</span>
+                <span>Telemetria</span>
+            </a>
+            <a href="/classificacao" class="f1-nav-item">
+                <span class="f1-nav-icon">🏆</span>
+                <span>Classificação</span>
+            </a>
+        </nav>
+
+        <div class="f1-status-pill">
+            <span class="f1-status-dot"></span>
+            <span class="f1-status-text">PIT WALL LIVE</span>
+        </div>
     </div>
-</nav>
+    <div class="f1-speed-stripe">
+        <div class="f1-stripe-accent"></div>
+        <div class="f1-stripe-checkers"></div>
+    </div>
+</header>

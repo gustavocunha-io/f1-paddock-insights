@@ -19,17 +19,15 @@ def obter_noticias(nome_piloto:str):
     conteudo_pagina:str = obter_conteudo_pagina(URL_F1, HEADERS)
     soup:BeautifulSoup = BeautifulSoup(conteudo_pagina, "html.parser")
     div_noticias = soup.find(class_= re.compile(r"mt-\d+ wp-block-grande-premio-news-grid"))
-    article_noticias = div_noticias.select("article a")[:10]
+    article_noticias = div_noticias.select("article a")
     noticias_piloto_list = []
 
     for noticia in article_noticias:
         link = noticia.get("href")
 
         if nome_piloto.lower() in link:
-            time.sleep(2) # Evitar bloqueios por DDOS
+            time.sleep(3) # Evitar bloqueios por DDOS
             noticias_piloto_list.append(obter_conteudo_interno(link))
-
-    print(len(noticias_piloto_list))
 
     return noticias_piloto_list
 
@@ -57,7 +55,7 @@ def obter_conteudo_interno(url):
         "conteudo": conteudo_completo
     }
 
-def obter_classificacao_pilotos() -> list[ClassificacaoPilotos]:
+def obter_classificacao() -> ClassificacaoPilotos:
     """
         Obtêm os dados da classificação dos pilotos utilizando soup com expressão regular 
         para realizar a filtragem.
@@ -71,6 +69,7 @@ def obter_classificacao_pilotos() -> list[ClassificacaoPilotos]:
     
     # Lógica para raspar e armazenar os dados dos 3 primeiros pilotos na classificação.
     div_lideres = tabela.find_all("div", style=re.compile(r"--tc:\s*#"))
+
     classificacao_pilotos:ClassificacaoPilotos = ClassificacaoPilotos(f"Classificação Fórmula 1 {ano_atual} - Pilotos")
    
     for dados_piloto in div_lideres:

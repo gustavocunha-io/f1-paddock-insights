@@ -3,20 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>{% if piloto %}{{ piloto.nome_completo }} - Telemetria F1{% else %}Telemetria F1 Paddock{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='exibir.css') }}">
 </head>
 <body>
-    {% if piloto %}
-        <div style="border-top: 5px solid #{{ piloto.cor_equipe }}; padding: 20px;">
-            <h1>Paddock AI</h1>
-            <h2>Equipe: {{ piloto.equipe }}</h2>
+    {% include 'cabecalho.html' %}
+
+    <main class="exibir-container">
         
-            {% if piloto.foto_url %}
-                <img src="{{ piloto.foto_url }}" width="100px" alt="Foto do Piloto">
-            {% else %}
-                <p>Foto não disponível</p>
-            {% endif %}
-        </div>
-    {% endif %}
+        {% if piloto %}
+        <!-- DRIVER HERO CARD WITH DYNAMIC ALERT LEVEL & TEAM COLOR -->
+        <section class="driver-hero alerta-{{ indicadores.nivel_alerta if indicadores else 'baixo' }}" style="--team-color: #{{ piloto.cor_equipe or 'e10600' }};">
+            
+            <!-- WATERMARK NUMBER -->
+            <div class="driver-number-watermark">
+                #{{ piloto.numero or '01' }}
+            </div>
+
+            <!-- ALERT BANNER -->
+            <div class="driver-alert-banner">
+                <span class="alert-icon">
+                    {% if indicadores.nivel_alerta == 'alto' %}🚨{% elif indicadores.nivel_alerta == 'medio' %}⚠️{% else %}🟢{% endif %}
+                </span>
+                <span class="alert-text">{{ indicadores.alerta_label if indicadores else 'MONITORAMENTO DE PISTA ATIVO' }}</span>
+            </div>
+
+            <div class="driver-hero-inner">
+                <!-- DRIVER PHOTO -->
+                <div class="driver-photo-container">
+                    {% if piloto.foto_url %}
+                        <img src="{{ piloto.foto_url }}" alt="Foto de {{ piloto.nome_completo }}" class="driver-photo">
+                    {% else %}
+                        <div class="driver-photo-placeholder">
+                            <span>🏎️</span>
+                        </div>
+                    {% endif %}
+                    <div class="driver-number-badge">
+                        #{{ piloto.numero or 'F1' }}
+                    </div>
+                </div>
+
+                <!-- DRIVER DETAILS -->
+                <div class="driver-details">
+                    <div class="driver-meta-tags">
+                        <span class="team-tag-badge" style="border-left: 4px solid #{{ piloto.cor_equipe or 'e10600' }};">
+                            {{ piloto.equipe }}
+                        </span>
+                        {% if piloto.codigo_pais %}
+                            <span class="country-badge">{{ piloto.codigo_pais }}</span>
+                        {% endif %}
+                    </div>
+
+                    <h1 class="driver-hero-name">{{ piloto.nome_completo }}</h1>
+
+                    <!-- TELEMETRY STATS ROW -->
+                    <div class="telemetry-bar-row">
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">POSIÇÃO</span>
+                            <span class="telemetry-val">
+                                {% if indicadores.posicao != 'N/D' %}
+                                    {{ indicadores.posicao }}º no Mundial
+                                {% else %}
+                                    Grid Oficial
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">PONTOS</span>
+                            <span class="telemetry-val">{{ indicadores.pontos }} pts</span>
+                        </div>
+                        <div class="telemetry-item">
+                            <span class="telemetry-label">CARRO</span>
+                            <span class="telemetry-val">#{{ piloto.numero }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISUAL WIDGET: VELOCÍMETRO / CHANCE DE VITÓRIA (REGRA DO PROFESSOR) -->
+            <div class="victory-gauge-widget">
+                <div class="gauge-header">
+                    <span class="gauge-icon">⚡</span>
+                    <span class="gauge-title">CHANCE DE VITÓRIA / PERFORMANCE PREVISTA</span>
+                </div>
+                
+                <div class="gauge-body">
+                    <!-- CIRCULAR PROGRESS GAUGE (SVG) -->
+                    <div class="speedometer-container">
+                        <svg class="speedometer-svg" viewBox="0 0 120 120">
+                            <circle class="speedometer-bg" cx="60" cy="60" r="48" />
+                            <circle 
+                                class="speedometer-progress" 
+                                cx="60" 
+                                cy="60" 
+                                r="48" 
+                                style="--percent: {{ indicadores.chance_vitoria if indicadores else 50 }};"
+                            />
+                        </svg>
+                        <div class="speedometer-val-wrap">
+                            <span class="speedometer-number">{{ indicadores.chance_vitoria if indicadores else 50 }}%</span>
+                            <span class="speedometer-unit">POTENCIAL</span>
+                        </div>
+                    </div>
+
+                    <div class="gauge-details">
+                        <div class="gauge-bar-track">
+                            <div class="gauge-bar-fill" style="width: {{ indicadores.chance_vitoria if indicadores else 50 }}%;"></div>
+                        </div>
+                        <p class="gauge-sub">
+                            Probabilidade estimada combinando colocação no campeonato, histórico da escuderia e ritmo de corrida atual.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-bottom-accent"></div>
+        </section>
+
+        <!-- TEAM RADIO / AI ANALYSIS SECTION -->
+        <section class="radio-analysis-section">
+            <div class="radio-box-header">
+                <div class="radio-header-left">
+                    <div class="radio-device-icon">📻</div>
+                    <div class="radio-led-blinking"></div>
+                    <div class="radio-header-titles">
+                        <h2 class="radio-title">PIT WALL // COMUNICAÇÃO DE RÁDIO</h2>
+                        <span class="radio-subtitle">ÁUDIO DESCRIPTOGRAFADO VIA GOOGLE GEMINI</span>
+                    </div>
+                </div>
+
+                <div class="audio-wave">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="radio-content-wrapper">
+                <div class="radio-bubble">
+                    <div class="radio-callsign">
+                        <span class="mic-icon">🎙️</span>
+                        <span>[CANAL_PIT_WALL] &bull; <strong>{{ tom | upper if tom else 'ENGENHARIA DE PISTA' }}</strong>:</span>
+                    </div>
+
+                    <div class="analysis-markdown-body">
+                        {{ analise | safe }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCRAPED NEWS SECTION (IF ANY) -->
+        {% if noticias and noticias|length > 0 %}
+        <section class="news-section">
+            <div class="news-header">
+                <span class="news-icon">📰</span>
+                <h3 class="news-title">BASTIDORES DO PILOTO // NOTÍCIAS GRANDE PRÊMIO</h3>
+            </div>
+            <div class="news-grid">
+                {% for noticia in noticias %}
+                <article class="news-card">
+                    <h4 class="news-headline">{{ noticia.titulo if noticia is mapping else noticia }}</h4>
+                    {% if noticia is mapping and noticia.conteudo %}
+                        <p class="news-snippet">{{ noticia.conteudo[:200] }}...</p>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+
+        <!-- ACTIONS ROW (MOBILE FRIENDLY) -->
+        <section class="action-buttons-row">
+            <a href="/" class="f1-action-btn primary">
+                <span>🏎️ Analisar Outro Piloto</span>
+            </a>
+            <a href="/classificacao" class="f1-action-btn secondary">
+                <span>🏆 Ver Classificação Geral</span>
+            </a>
+        </section>
+
+        {% else %}
+        <!-- ERROR / NOT FOUND SCREEN -->
+        <section class="error-screen">
+            <div class="error-flag">⚠️</div>
+            <h1 class="error-title">PILOTO NÃO LOCALIZADO</h1>
+            <p class="error-message">
+                {{ erro or 'Não foi possível encontrar as informações deste piloto nos registros oficiais da F1.' }}
+            </p>
+            <div class="error-suggestions">
+                <p>Tente buscar por pilotos do grid atual:</p>
+                <div class="error-pills">
+                    <a href="/" class="suggest-pill">Verstappen</a>
+                    <a href="/" class="suggest-pill">Hamilton</a>
+                    <a href="/" class="suggest-pill">Norris</a>
+                    <a href="/" class="suggest-pill">Leclerc</a>
+                </div>
+            </div>
+            <div class="error-action">
+                <a href="/" class="f1-action-btn primary">
+                    <span>⬅ Voltar ao Painel Principal</span>
+                </a>
+            </div>
+        </section>
+        {% endif %}
+
+    </main>
+
+    <footer class="f1-footer">
+        <p>F1 Paddock AI • Telemetria Integrada com OpenF1, Scraping e Google Gemini</p>
+    </footer>
 </body>
 </html>
