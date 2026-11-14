@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Paddock Insights - Telemetria, Web Scraping e Estratégia com IA</title>
+  <meta name="description" content="Apresentação do projeto F1 Paddock Insights: Sistema Mobile-First integrando OpenF1 REST API, Web Scraping no Grande Prêmio e Google Gemini AI.">
+  <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg">
+  
+  <!-- Google Fonts: Orbitron & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Mobile-First Stylesheet (Compatível com Flask static e GitHub Pages) -->
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='docs.css') }}">
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP NAVIGATION BAR (MOBILE-FIRST)
+       ======================================================================== -->
+  <header class="f1-navbar">
+    <div class="container f1-navbar-inner">
+      <a href="#" class="brand-wrapper" title="F1 Paddock Insights">
+        <span class="brand-badge">F1</span>
+        <div class="brand-title-wrap">
+          <span class="brand-name">PADDOCK <span class="brand-accent">AI</span></span>
+          <span class="brand-sub">PIT WALL &bull; TELEMETRY</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="desktop-nav-links">
+        <a href="/" class="desktop-nav-link app-link-main" style="color: var(--neon-cyan); font-weight: 800; border: 1px solid rgba(0,240,255,0.4); padding: 0.35rem 0.75rem; border-radius: var(--radius-sm); background: var(--neon-cyan-soft);" title="Abrir a aplicação principal de telemetria">🏎️ App Principal</a>
+        <a href="#visao-geral" class="desktop-nav-link">Visão Geral</a>
+        <a href="#web-services" class="desktop-nav-link">3 Web Services</a>
+        <a href="#demonstracao-video" class="desktop-nav-link">Vídeo Demo</a>
+        <a href="#telas-mockups" class="desktop-nav-link">Telas</a>
+        <a href="#simulador-ao-vivo" class="desktop-nav-link">Telemetria</a>
+        <a href="#como-executar" class="desktop-nav-link">Como Rodar</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="status-pill-header">
+          <span class="status-dot"></span>
+          <span>PIT WALL LIVE</span>
+        </div>
+
+        <a href="/" class="btn btn-primary app-link-main" style="padding: 0.4rem 0.75rem; font-size: 0.75rem; min-height: 36px;" title="Abrir o App Principal de Telemetria F1">
+          <span>🏎️ App</span>
+        </a>
+
+        <a href="https://github.com/gustavocunha-io/f1-paddock-insights" target="_blank" rel="noopener noreferrer" class="btn btn-github" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; min-height: 36px;">
+          <span>GitHub</span>
+        </a>
+
+        <!-- Mobile Hamburger Button -->
+        <button type="button" id="hamburger-btn" class="hamburger-btn" aria-label="Abrir menu de navegação" aria-expanded="false">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-speed-stripe"></div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <aside id="mobile-nav-drawer" class="mobile-nav-drawer">
+    <a href="/" class="mobile-nav-link nav-link app-link-main" style="color: var(--neon-cyan); background: rgba(0, 240, 255, 0.08); border-radius: var(--radius-sm); margin-bottom: 0.5rem; font-weight: 900;">
+      <span>🏎️ Acessar App Principal</span>
+      <span>→</span>
+    </a>
+    <a href="#visao-geral" class="mobile-nav-link nav-link"><span>Visão Geral</span> <span>→</span></a>
+    <a href="#web-services" class="mobile-nav-link nav-link"><span>Os 3 Web Services</span> <span>→</span></a>
+    <a href="#demonstracao-video" class="mobile-nav-link nav-link"><span>Vídeo de Demonstração</span> <span>→</span></a>
+    <a href="#telas-mockups" class="mobile-nav-link nav-link"><span>Telas & Mockups</span> <span>→</span></a>
+    <a href="#simulador-ao-vivo" class="mobile-nav-link nav-link"><span>Simulador de Telemetria</span> <span>→</span></a>
+    <a href="#como-executar" class="mobile-nav-link nav-link"><span>Como Executar</span> <span>→</span></a>
+    <a href="https://github.com/gustavocunha-io/f1-paddock-insights" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem;">
+      <span>Acessar Código no GitHub ↗</span>
+    </a>
+  </aside>
+
+  <!-- ========================================================================
+       HERO SECTION
+       ======================================================================== -->
+  <section class="hero-section">
+    <div class="container hero-grid-layout">
+      <div class="hero-text-col">
+        
+        <!-- Champion Tag -->
+        <div class="hero-banner-tag">
+          <span>🏆</span>
+          <span>TEMPORADA 2026 CONCLUÍDA // CAMPEÃO DEFINIDO</span>
+        </div>
+
+        <h1 class="hero-title">
+          SISTEMA DE TELEMETRIA <br>
+          <span class="accent-gradient">& ESTRATÉGIA COM IA</span>
+        </h1>
+
+        <p class="hero-description">
+          Uma plataforma inteligente desenvolvida como <strong>Trabalho Prático de Web Services</strong>. Unifica a API oficial da <strong>OpenF1</strong>, <strong>Web Scraping</strong> em tempo real de notícias esportivas do <strong>Grande Prêmio</strong> e análises táticas de rádio com inteligência artificial gerativa via <strong>Google Gemini</strong>.
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-cta-group">
+          <a href="#demonstracao-video" class="btn btn-primary">
+            <span>▶️ Vídeo de Demonstração</span>
+          </a>
+          <a href="#simulador-ao-vivo" class="btn btn-secondary">
+            <span>⚡ Testar Telemetria</span>
+          </a>
+          <a href="https://github.com/gustavocunha-io/f1-paddock-insights" target="_blank" rel="noopener noreferrer" class="btn btn-github">
+            <span>Repositório</span>
+          </a>
+        </div>
+
+        <!-- Telemetry Highlights Strip -->
+        <div class="hero-highlights-strip">
+          <div class="highlight-item">
+            <span class="highlight-icon">📡</span>
+            <div class="highlight-info">
+              <h4>OpenF1 API</h4>
+              <p>Fotos, cores e carros</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">🌐</span>
+            <div class="highlight-info">
+              <h4>Web Scraping</h4>
+              <p>Notícias e classificação GP</p>
+            </div>
+          </div>
+          <div class="highlight-item">
+            <span class="highlight-icon">🧠</span>
+            <div class="highlight-info">
+              <h4>Google Gemini</h4>
+              <p>Pit Wall Radio em 3 tons</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Hero Graphic Preview -->
+      <div class="hero-desktop-preview">
+        <img src="./assets/images/mockup-telemetry-champion.svg" alt="Preview da telemetria do piloto campeão" style="border-radius: var(--radius-lg); box-shadow: var(--shadow-card);">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       CHAMPIONSHIP COMPLETED SPECIAL CARD (REQUISITO: CAMPEÃO DEFINIDO)
+       ======================================================================== -->
+  <section class="container">
+    <div class="champion-alert-card">
+      <span class="champion-card-badge">🏆 CAMPEONATO FINALIZADO</span>
+      <h2 class="champion-card-title">ANDREA KIMI ANTONELLI É O CAMPEÃO MUNDIAL 2026</h2>
+      <p class="champion-card-desc">
+        A temporada oficial de 2026 encerrou-se com título consagrado para o piloto italiano da Mercedes-AMG. O gráfico de chance de vitória foi atualizado no motor de telemetria: o campeão detém <strong>100% de probabilidade confirmada</strong>, enquanto os demais concorrentes têm chance finalizada em <strong>0%</strong>.
+      </p>
+
+      <div class="champion-stats-grid">
+        <div class="champ-stat-box">
+          <span class="champ-stat-label">Campeão</span>
+          <span class="champ-stat-value">Antonelli #12</span>
+        </div>
+        <div class="champ-stat-box">
+          <span class="champ-stat-label">Pontos Totais</span>
+          <span class="champ-stat-value">390 pts</span>
+        </div>
+        <div class="champ-stat-box">
+          <span class="champ-stat-label">Chance de Título</span>
+          <span class="champ-stat-value green">100% CONFIRMADO</span>
+        </div>
+        <div class="champ-stat-box">
+          <span class="champ-stat-label">Vice-campeão</span>
+          <span class="champ-stat-value" style="color: #6ba6ff;">Verstappen (279 pts)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       VÍDEO DE DEMONSTRAÇÃO (REQUISITO: VÍDEO DE DEMONSTRAÇÃO)
+       ======================================================================== -->
+  <section id="demonstracao-video" class="section-wrapper">
+    <div class="container">
+      <div class="section-label">
+        <span>🎬</span>
+        <span>Apresentação Audiovisual</span>
+      </div>
+      <h2 class="section-title">VÍDEO DE DEMONSTRAÇÃO DO SISTEMA</h2>
+      <p class="section-subtitle">
+        Veja a aplicação em funcionamento: da seleção do piloto e escolha da personalidade do rádio até a resposta gerada com inteligência artificial e a telemetria do campeão.
+      </p>
+
+      <!-- Video Showcase Box -->
+      <div class="video-showcase-box">
+        <!-- Top Toolbar -->
+        <div class="video-header-bar">
+          <div class="video-header-left">
+            <span class="rec-blinking-dot"></span>
+            <span class="video-header-title">PIT WALL COMMS // VÍDEO PLAYER OFICIAL</span>
+          </div>
+
+          <div class="video-mode-switch">
+            <button type="button" id="mode-video-btn" class="mode-tab-btn active">🎥 Vídeo Demonstração</button>
+            <button type="button" id="mode-sim-btn" class="mode-tab-btn">⚡ Simulador Interativo</button>
+          </div>
+        </div>
+
+        <!-- Video Stage Area -->
+        <div class="video-stage-container">
+          
+          <!-- Native Video Player Wrap (Active by default) -->
+          <div id="video-native-wrap" style="width: 100%; height: 100%; display: block;">
+            <video 
+              id="f1-demo-video" 
+              class="html5-video-player"
+              controls 
+              playsinline
+              preload="auto"
+              poster="./assets/images/demo-poster.svg"
+            >
+              <source src="./assets/videos/demo.mp4" type="video/mp4">
+              Seu navegador não suporta a reprodução direta deste formato de vídeo.
+            </video>
+          </div>
+
+          <!-- Interactive Video Simulation Layer (Toggleable) -->
+          <div id="video-sim-wrap" class="video-simulation-layer" style="display: none;">
+            <!-- HUD info -->
+            <div class="sim-telemetry-hud">
+              <span id="sim-hud-text">SYS // INIT // 2026.11.14</span>
+              <span>PIT WALL STATUS: LIVE 🟢</span>
+            </div>
+
+            <!-- Central Content Display -->
+            <div class="sim-center-content">
+              <span class="sim-step-badge">CAPÍTULO DEMO</span>
+              <h3 id="sim-step-title" class="sim-step-title">1. Cockpit & Interface Mobile-First</h3>
+              <p id="sim-step-desc" class="sim-step-desc">
+                Visão geral da interface responsiva construída especificamente para uso em smartphones com tema de Pit Wall da Fórmula 1.
+              </p>
+              
+              <div class="sim-visual-widget">
+                <span id="sim-widget-text">🏎️ Grid 2026 Conectado • Datalist de Pilotos Ativo</span>
+              </div>
+
+              <div>
+                <button type="button" id="sim-play-trigger" class="sim-play-trigger-btn" aria-label="Iniciar Simulação" title="Clique para reproduzir / pausar demonstração">▶️</button>
+              </div>
+            </div>
+
+            <!-- Timeline Bottom Bar -->
+            <div class="sim-timeline-bar">
+              <span class="sim-time-text">PROGRESSO</span>
+              <div class="timeline-progress-track">
+                <div id="sim-progress-fill" class="timeline-progress-fill"></div>
+              </div>
+              <span id="sim-time-display" class="sim-time-text">00:00 / 03:30</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Chapters Row -->
+        <div class="video-chapters-section">
+          <div class="chapters-title">
+            <span>⏱️</span>
+            <span>CAPÍTULOS DA DEMONSTRAÇÃO (CLIQUE PARA NAVEGAR):</span>
+          </div>
+
+          <div class="chapters-grid">
+            <button type="button" class="chapter-card-btn active" data-index="0">
+              <span class="chapter-time">00:00</span>
+              <span class="chapter-name">1. Visão Mobile-First</span>
+            </button>
+            <button type="button" class="chapter-card-btn" data-index="1">
+              <span class="chapter-time">00:35</span>
+              <span class="chapter-name">2. API OpenF1</span>
+            </button>
+            <button type="button" class="chapter-card-btn" data-index="2">
+              <span class="chapter-time">01:10</span>
+              <span class="chapter-name">3. Scraping Notícias</span>
+            </button>
+            <button type="button" class="chapter-card-btn" data-index="3">
+              <span class="chapter-time">01:50</span>
+              <span class="chapter-name">4. Rádio Pit Wall AI</span>
+            </button>
+            <button type="button" class="chapter-card-btn" data-index="4">
+              <span class="chapter-time">02:30</span>
+              <span class="chapter-name">5. Campeão 100%</span>
+            </button>
+            <button type="button" class="chapter-card-btn" data-index="5">
+              <span class="chapter-time">03:10</span>
+              <span class="chapter-name">6. Tabela Oficial 2026</span>
+            </button>
+          </div>
+
+          <!-- Video Upload Instructions -->
+          <div class="video-doc-banner">
+            <span>💡</span>
+            <div>
+              <strong>Como adicionar ou trocar seu arquivo de vídeo:</strong> Salve sua gravação de tela em <code>docs/assets/videos/demo.mp4</code>. O player acima está preparado para reproduzir automaticamente o arquivo nativo ou permitir a navegação interativa guiada.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       OS 3 PILARES DE WEB SERVICES (ARQUITETURA DETALHADA)
+       ======================================================================== -->
+  <section id="web-services" class="section-wrapper">
+    <div class="container">
+      <div class="section-label">
+        <span>⚙️</span>
+        <span>Integrações Técnicas</span>
+      </div>
+      <h2 class="section-title">OS 3 PILARES DE WEB SERVICES</h2>
+      <p class="section-subtitle">
+        O sistema combina três abordagens fundamentais para obter, transformar e gerar inteligência de dados esportivos.
+      </p>
+
+      <div class="services-grid">
+        
+        <!-- Pillar 1: OpenF1 REST API -->
+        <article class="service-card card-openf1">
+          <div class="service-card-top">
+            <span class="service-card-icon">📡</span>
+            <span class="service-pill-tag">API REST PÚBLICA</span>
+          </div>
+          <h3 class="service-card-title">OpenF1 API</h3>
+          <span class="service-card-endpoint">GET api.openf1.org/v1/drivers</span>
+          <p class="service-card-body">
+            Consumo oficial de endpoints de telemetria e cadastros da F1. O backend realiza buscas inteligentes tolerantes a falhas por sobrenome, primeiro nome ou nome completo.
+          </p>
+          <ul class="service-features-list">
+            <li>Fotografia oficial do piloto (headshot)</li>
+            <li>Número oficial do carro no grid (#12, #1, #44)</li>
+            <li>Código do país de origem (ITA, NED, GBR)</li>
+            <li>Cor hexadecimal da escuderia (ex: Mercedes #00A19C)</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 2: BeautifulSoup Web Scraping -->
+        <article class="service-card card-scraping">
+          <div class="service-card-top">
+            <span class="service-card-icon">🌐</span>
+            <span class="service-pill-tag">WEB SCRAPING</span>
+          </div>
+          <h3 class="service-card-title">Grande Prêmio</h3>
+          <span class="service-card-endpoint">HTML Parsing via BeautifulSoup4</span>
+          <p class="service-card-body">
+            Raspagem em tempo real desenvolvida com BeautifulSoup e Expressões Regulares (`re`). Extrai tanto notícias contextuais quanto a tabela geral de classificação do mundial.
+          </p>
+          <ul class="service-features-list">
+            <li>Filtro dinâmico de notícias por piloto</li>
+            <li>Raspagem de títulos e corpos de matérias completas</li>
+            <li>Tabela oficial com mais de 20 pilotos e pontos</li>
+            <li>Mecanismo de delay (3s) para proteção contra DDOS</li>
+          </ul>
+        </article>
+
+        <!-- Pillar 3: Google Gemini Generative AI -->
+        <article class="service-card card-gemini">
+          <div class="service-card-top">
+            <span class="service-card-icon">🧠</span>
+            <span class="service-pill-tag">LLM WEB SERVICE</span>
+          </div>
+          <h3 class="service-card-title">Google Gemini AI</h3>
+          <span class="service-card-endpoint">google-genai (gemini-3.5-flash-lite)</span>
+          <p class="service-card-body">
+            Geração de comunicação de rádio realista do Pit Wall. A inteligência sintetiza os dados do OpenF1, a tabela de pontuação e as últimas notícias em um prompt contextual.
+          </p>
+          <ul class="service-features-list">
+            <li>🔧 Engenheiro Sério: foco em telemetria e pneus</li>
+            <li>🎙️ Narrador Emocionado: alta adrenalina e épico</li>
+            <li>🏁 Comentarista Corneta: humor ácido e zoeira de paddock</li>
+            <li>🔄 Rodízio Automático de Chaves (Round-Robin &amp; Fallback)</li>
+            <li>🔒 Chaves inseridas via UI (Zero dependência de .env)</li>
+            <li>Formatação limpa renderizada via Python-Markdown</li>
+          </ul>
+        </article>
+
+      </div>
+
+      <!-- Architecture Diagram (SVG) -->
+      <div id="arquitetura" class="architecture-diagram-wrapper">
+        <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; text-align: center;">DIAGRAMA DA ARQUITETURA DE DADOS</h3>
+        <img src="./assets/images/architecture-diagram.svg" alt="Diagrama de Arquitetura de Web Services da aplicação F1 Paddock Insights">
+        <p class="diagram-caption">
+          Fluxo de integração entre o Cliente Mobile, Controlador Flask e os 3 Web Services distribuídos.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       TELAS & MOCKUPS (REQUISITO: IMAGENS)
+       ======================================================================== -->
+  <section id="telas-mockups" class="section-wrapper">
+    <div class="container">
+      <div class="section-label">
+        <span>📱</span>
+        <span>Interface do Usuário</span>
+      </div>
+      <h2 class="section-title">TELAS &amp; EXPERIÊNCIA MOBILE-FIRST</h2>
+      <p class="section-subtitle">
+        Projetada com prioridade para dispositivos móveis: cartões de piloto fluidos, gráficos circulares e estética automotiva esportiva de alto contraste.
+      </p>
+
+      <div class="mockups-grid">
+        
+        <!-- Mockup 1: Mobile Home -->
+        <div class="mockup-item">
+          <div class="mockup-preview-wrap">
+            <img src="./assets/images/mockup-mobile-home.svg" alt="Mockup da tela inicial mobile do F1 Paddock AI">
+          </div>
+          <div class="mockup-info">
+            <span class="mockup-tag">TELA INICIAL &bull; MOBILE</span>
+            <h3 class="mockup-title">Cockpit de Configuração de Telemetria</h3>
+            <p class="mockup-desc">
+              Campo de busca com datalist dos pilotos da temporada, botões de atalho rápido e seleção da personalidade do rádio com feedback tátil.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mockup 2: Telemetria do Campeão -->
+        <div class="mockup-item">
+          <div class="mockup-preview-wrap">
+            <img src="./assets/images/mockup-telemetry-champion.svg" alt="Mockup da telemetria do piloto campeão Andrea Kimi Antonelli">
+          </div>
+          <div class="mockup-info">
+            <span class="mockup-tag">TELEMETRIA &bull; CAMPEÃO MUNDIAL</span>
+            <h3 class="mockup-title">Card do Piloto &amp; Velocímetro 100%</h3>
+            <p class="mockup-desc">
+              Exibe Andrea Kimi Antonelli com status de Campeão Confirmado, gauge de 100%, 390 pontos acumulados e cores oficiais da Mercedes-AMG.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mockup 3: Rádio Pit Wall AI -->
+        <div class="mockup-item">
+          <div class="mockup-preview-wrap">
+            <img src="./assets/images/mockup-radio-gemini.svg" alt="Mockup da comunicação de rádio do Pit Wall gerada pelo Google Gemini">
+          </div>
+          <div class="mockup-info">
+            <span class="mockup-tag">INTELIGÊNCIA ARTIFICIAL &bull; PIT WALL</span>
+            <h3 class="mockup-title">Rádio Pit Wall Descriptografado</h3>
+            <p class="mockup-desc">
+              Simulação de canal de rádio seguro com animação de onda sonora de áudio e síntese tática produzida dinamicamente pelo Google Gemini.
+            </p>
+          </div>
+        </div>
+
+        <!-- Mockup 4: Classificação Mundial -->
+        <div class="mockup-item">
+          <div class="mockup-preview-wrap">
+            <img src="./assets/images/mockup-standings.svg" alt="Mockup da tabela de classificação geral oficial de pilotos 2026">
+          </div>
+          <div class="mockup-info">
+            <span class="mockup-tag">WEB SCRAPING &bull; TABELA OFICIAL</span>
+            <h3 class="mockup-title">Classificação Geral do Mundial 2026</h3>
+            <p class="mockup-desc">
+              Tabela de pontuação raspada em tempo real diretamente do portal Grande Prêmio, destacando o pódio e escuderias.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SIMULADOR INTERATIVO AO VIVO DE TELEMETRIA
+       ======================================================================== -->
+  <section id="simulador-ao-vivo" class="section-wrapper">
+    <div class="container">
+      <div class="section-label">
+        <span>⚡</span>
+        <span>Demonstração Interativa</span>
+      </div>
+      <h2 class="section-title">SIMULADOR DO MOTOR DE TELEMETRIA</h2>
+      <p class="section-subtitle">
+        Teste interativamente como o algoritmo de telemetria do backend calcula a probabilidade para o campeão consagrado versus os demais pilotos com a temporada finalizada.
+      </p>
+
+      <div class="simulator-card">
+        
+        <!-- Pilot selector buttons -->
+        <div class="sim-pilot-selector">
+          <button type="button" class="sim-pill-btn active" data-pilot="antonelli">
+            🏆 Kimi Antonelli (1º Campeão)
+          </button>
+          <button type="button" class="sim-pill-btn" data-pilot="verstappen">
+            🥈 Max Verstappen (2º Vice)
+          </button>
+          <button type="button" class="sim-pill-btn" data-pilot="russell">
+            🥉 George Russell (3º Lugar)
+          </button>
+          <button type="button" class="sim-pill-btn" data-pilot="hamilton">
+            Lewis Hamilton (4º Lugar)
+          </button>
+          <button type="button" class="sim-pill-btn" data-pilot="norris">
+            Lando Norris (6º Lugar)
+          </button>
+        </div>
+
+        <!-- Interactive Telemetry Output Display -->
+        <div class="sim-telemetry-result-box">
+          <div class="sim-result-header">
+            <div>
+              <h3 id="sim-driver-name" class="sim-driver-title">Andrea Kimi Antonelli</h3>
+              <span id="sim-driver-team" class="sim-team-tag">Mercedes-AMG Petronas F1 Team (ITA) &bull; Carro #12</span>
+            </div>
+            <div style="text-align: right;">
+              <span id="sim-driver-pos" style="font-family: var(--font-f1); font-weight: 800; font-size: 0.95rem; color: #ffffff;">1º no Mundial</span>
+              <span id="sim-driver-points" style="display: block; font-size: 0.8rem; color: var(--gold-champion); font-weight: 700;">390 pts</span>
+            </div>
+          </div>
+
+          <!-- Circular Speedometer SVG Interactive Widget -->
+          <div class="gauge-flex-wrap">
+            <svg class="gauge-circular-svg" viewBox="0 0 100 100">
+              <circle class="gauge-bg-circle" cx="50" cy="50" r="40" />
+              <!-- Circumference = 2 * PI * 40 ≈ 251.3 -->
+              <circle 
+                id="sim-gauge-circle" 
+                class="gauge-fill-circle" 
+                cx="50" 
+                cy="50" 
+                r="40" 
+                stroke-dasharray="251.3" 
+                stroke-dashoffset="0"
+              />
+            </svg>
+
+            <div class="sim-gauge-explanation">
+              <span id="sim-gauge-percent" class="sim-gauge-value">100%</span>
+              <span id="sim-gauge-status-text" class="sim-gauge-status champion">
+                CAMPEÃO CONFIRMADO // TÍTULO CONQUISTADO
+              </span>
+              <p id="sim-gauge-desc-text" class="sim-gauge-desc">
+                Campeonato finalizado. Piloto consagrado Campeão Mundial da temporada de 2026!
+              </p>
+            </div>
+          </div>
+
+          <!-- Radio preview bubble -->
+          <div style="background: #141926; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.85rem;">
+            <div style="font-size: 0.75rem; color: var(--neon-cyan); font-weight: 800; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>🎙️ [CANAL_PIT_WALL] &bull; </span>
+              <span id="sim-radio-channel-name">ENGENHARIA DE PISTA MERCEDES</span>
+            </div>
+            <p id="sim-radio-quote" style="font-size: 0.82rem; color: #cbd5e1; font-style: italic;">
+              "Kimi, P1 confirmado no campeonato mundial. Você é o novo campeão do mundo! Traga o carro para os boxes, missão cumprida com louvor!"
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       COMO EXECUTAR LOCALMENTE (PASSO A PASSO)
+       ======================================================================== -->
+  <section id="como-executar" class="section-wrapper">
+    <div class="container">
+      <div class="section-label">
+        <span>💻</span>
+        <span>Guia do Desenvolvedor</span>
+      </div>
+      <h2 class="section-title">COMO EXECUTAR O PROJETO LOCALMENTE</h2>
+      <p class="section-subtitle">
+        Siga as instruções abaixo para rodar o backend Flask e todas as integrações de Web Services no seu computador.
+      </p>
+
+      <!-- Step 1: Clone -->
+      <div class="setup-step-box">
+        <span class="step-num-badge">PASSO 01</span>
+        <h3 class="step-title">Clonar o Repositório Git</h3>
+        <p class="step-desc">Abra o terminal no diretório desejado e faça o clone do projeto oficial:</p>
+        <div class="code-block-wrap">
+          <button type="button" class="copy-btn" data-target="code-clone">Copiar</button>
+          <pre id="code-clone">git clone https://github.com/gustavocunha-io/f1-paddock-insights.git
+cd f1-paddock-insights</pre>
+        </div>
+      </div>
+
+      <!-- Step 2: Virtual Env -->
+      <div class="setup-step-box">
+        <span class="step-num-badge">PASSO 02</span>
+        <h3 class="step-title">Criar o Ambiente Virtual &amp; Instalar Dependências</h3>
+        <p class="step-desc">Você pode utilizar o gerenciador Conda ou o padrão Python Venv com Pip:</p>
+        <div class="code-block-wrap">
+          <button type="button" class="copy-btn" data-target="code-install">Copiar</button>
+          <pre id="code-install"># Opção A: Utilizando Python Venv padrão
+python -m venv venv
+# No Windows:
+.\venv\Scripts\activate
+# No Linux/Mac:
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+# Opção B: Utilizando Conda
+conda env create -f environment.yml
+conda activate web_services</pre>
+        </div>
+      </div>
+
+      <!-- Step 3: API Key & Rotation -->
+      <div class="setup-step-box">
+        <span class="step-num-badge">PASSO 03</span>
+        <h3 class="step-title">Chave(s) de API do Google Gemini (Direto no Input)</h3>
+        <p class="step-desc">
+          <strong>Não é necessário criar arquivo <code>.env</code>!</strong> Para publicação segura no GitHub sem expor credenciais, insira sua chave (ou múltiplas chaves separadas por vírgula para rodízio automático) diretamente no campo do formulário da aplicação. A chave fica salva no navegador (localStorage):
+        </p>
+        <div class="code-block-wrap">
+          <button type="button" class="copy-btn" data-target="code-key-example">Copiar</button>
+          <pre id="code-key-example">AIzaSyChave1Exemplo..., AIzaSyChave2Exemplo...</pre>
+        </div>
+      </div>
+
+      <!-- Step 4: Run Flask -->
+      <div class="setup-step-box">
+        <span class="step-num-badge">PASSO 04</span>
+        <h3 class="step-title">Iniciar o Servidor Flask</h3>
+        <p class="step-desc">Execute o arquivo principal para inicializar a aplicação na porta padrão 5000:</p>
+        <div class="code-block-wrap">
+          <button type="button" class="copy-btn" data-target="code-run">Copiar</button>
+          <pre id="code-run">python paddock.py</pre>
+        </div>
+        <p style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--green-live);">
+          ✓ Pronto! Acesse pelo seu navegador em: <strong>http://localhost:5000</strong>
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="f1-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">
+          F1 PADDOCK <span style="color: var(--f1-red);">AI</span>
+        </div>
+        <p class="footer-desc">
+          Trabalho Prático Individual de Web Services &bull; Engenharia de Software. Sistema integrando OpenF1 API, Web Scraping no Grande Prêmio e Google Gemini.
+        </p>
+      </div>
+
+      <div class="footer-links-row">
+        <a href="/" class="app-link-main" style="color: var(--neon-cyan); font-weight: 700;">🏎️ App Principal (Telemetria)</a>
+        <a href="https://github.com/gustavocunha-io/f1-paddock-insights" target="_blank" rel="noopener noreferrer">GitHub do Projeto ↗</a>
+        <a href="#demonstracao-video">Vídeo Demo</a>
+        <a href="#como-executar">Guia Local</a>
+      </div>
+
+      <div class="footer-copy">
+        Desenvolvido por <strong>Gustavo Cunha</strong> &bull; Temporada F1 2026
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/main.js"></script>
+</body>
+</html>

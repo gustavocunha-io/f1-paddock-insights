@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgBox" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141824"/>
+      <stop offset="100%" stop-color="#0d1018"/>
+    </linearGradient>
+    <linearGradient id="radioBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e10600"/>
+      <stop offset="50%" stop-color="#ff4d4d"/>
+      <stop offset="100%" stop-color="#7a0000"/>
+    </linearGradient>
+    <linearGradient id="cyanLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#0066ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="520" height="400" rx="16" fill="url(#bgBox)" stroke="#2b3449" stroke-width="2"/>
+  
+  <!-- Header Bar -->
+  <g transform="translate(20, 20)">
+    <rect width="480" height="52" rx="10" fill="#181d2c" stroke="#2a3348" stroke-width="1"/>
+    
+    <rect x="15" y="11" width="30" height="30" rx="6" fill="#e10600"/>
+    <text x="30" y="32" font-size="16" text-anchor="middle">📻</text>
+    
+    <circle cx="58" cy="26" r="4.5" fill="#00e676"/>
+    
+    <text x="72" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="1">PIT WALL // COMUNICAÇÃO DE RÁDIO</text>
+    <text x="72" y="38" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00f0ff" letter-spacing="0.5">ÁUDIO DESCRIPTOGRAFADO VIA GOOGLE GEMINI</text>
+    
+    <!-- Audio Wave Animation Graphic -->
+    <g transform="translate(370, 16)">
+      <line x1="10" y1="18" x2="10" y2="2" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="18" y1="20" x2="18" y2="0" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="26" y1="16" x2="26" y2="4" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="34" y1="20" x2="34" y2="0" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
+      <line x1="42" y1="15" x2="42" y2="5" stroke="#ff4d4d" stroke-width="3" stroke-linecap="round"/>
+      <line x1="50" y1="18" x2="50" y2="2" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="58" y1="20" x2="58" y2="0" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="66" y1="14" x2="66" y2="6" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+      <line x1="74" y1="17" x2="74" y2="3" stroke="#00f0ff" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Tone Selector Pills Row -->
+  <g transform="translate(20, 85)">
+    <rect x="0" y="0" width="150" height="28" rx="14" fill="#e10600" fill-opacity="0.2" stroke="#e10600"/>
+    <text x="75" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#ff4d4d" text-anchor="middle">🔧 Engenheiro Sério</text>
+
+    <rect x="160" y="0" width="160" height="28" rx="14" fill="#1b2130" stroke="#283248"/>
+    <text x="240" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10" fill="#8c97b2" text-anchor="middle">🎙️ Narrador Emocionado</text>
+
+    <rect x="330" y="0" width="150" height="28" rx="14" fill="#1b2130" stroke="#283248"/>
+    <text x="405" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10" fill="#8c97b2" text-anchor="middle">🏁 Comentarista Corneta</text>
+  </g>
+
+  <!-- Speech Bubble -->
+  <g transform="translate(20, 125)">
+    <rect width="480" height="250" rx="12" fill="#0d111a" stroke="#222b3d" stroke-width="1.5"/>
+    
+    <!-- Callsign Header -->
+    <rect x="0" y="0" width="480" height="34" rx="12" fill="#151b27"/>
+    <text x="18" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#00f0ff">
+      🎙️ [CANAL_PIT_WALL] • ENGENHARIA DE PISTA • PRIORIDADE MÁXIMA
+    </text>
+
+    <!-- Content / Analysis body -->
+    <g transform="translate(20, 50)">
+      <text x="0" y="16" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="13" fill="#ffffff">
+        Box, Kimi, Box! Leitura de telemetria completa da temporada:
+      </text>
+
+      <text x="0" y="42" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#a4b1cd">
+        • <tspan font-weight="700" fill="#00e676">Colocação no Mundial:</tspan> 1º lugar absoluto com 390 pontos.
+      </text>
+      
+      <text x="0" y="66" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#a4b1cd">
+        • <tspan font-weight="700" fill="#00f0ff">Telemetria de Motor:</tspan> Mercedes-AMG operando em modo de confiabilidade 100%.
+      </text>
+
+      <text x="0" y="90" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#a4b1cd">
+        • <tspan font-weight="700" fill="#ffd700">Ritmo de Corrida:</tspan> Gestão perfeita de compostos médios e duros na reta final.
+      </text>
+
+      <text x="0" y="114" font-family="'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#a4b1cd">
+        • <tspan font-weight="700" fill="#ff4d4d">Notícias GP:</tspan> Manchetes confirmam hegemonia da equipe e renovação contratual.
+      </text>
+
+      <!-- Engineer punchline box -->
+      <rect x="0" y="132" width="440" height="38" rx="6" fill="#182030" stroke="#00f0ff" stroke-width="0.8"/>
+      <text x="15" y="148" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10" fill="#00f0ff">
+        "Mensagem do rádio: Mantivemos o delta estável até a bandeirada.
+      </text>
+      <text x="15" y="161" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10" fill="#ffffff">
+        Você é o novo Campeão Mundial de Fórmula 1. Desligue o motor e comemore!"
+      </text>
+
+      <!-- Rotation status footer note -->
+      <g transform="translate(0, 178)">
+        <line x1="0" y1="0" x2="440" y2="0" stroke="#252e42" stroke-width="1"/>
+        <circle cx="8" cy="10" r="3" fill="#00e5ff"/>
+        <text x="16" y="13.5" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#00e5ff">
+          🔄 Rodízio de Chaves: Ativo (Chave #2 de 2 utilizada com sucesso no pool)
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="standBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141824"/>
+      <stop offset="100%" stop-color="#0e121a"/>
+    </linearGradient>
+    <linearGradient id="goldRow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff9900"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="480" rx="16" fill="url(#standBg)" stroke="#273145" stroke-width="2"/>
+  
+  <!-- Header -->
+  <g transform="translate(25, 20)">
+    <rect width="550" height="50" rx="8" fill="#181e2d" stroke="#252d3f" stroke-width="1"/>
+    <text x="20" y="32" font-size="18">🏆</text>
+    <text x="48" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="13" fill="#ffffff">CLASSIFICAÇÃO MUNDIAL DE PILOTOS // TEMPORADA 2026</text>
+    <text x="48" y="41" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00f0ff">DADOS RASPADOS EM TEMPO REAL VIA BEAUTIFULSOUP • GRANDE PRÊMIO</text>
+
+    <rect x="420" y="14" width="115" height="22" rx="4" fill="#00e676" fill-opacity="0.15" stroke="#00e676"/>
+    <text x="477" y="29" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#00ff88" text-anchor="middle">TEMPORADA ENCERRADA</text>
+  </g>
+
+  <!-- Table Header -->
+  <g transform="translate(25, 85)">
+    <rect width="550" height="30" rx="6" fill="#1b2232"/>
+    <text x="25" y="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#717d96">POS</text>
+    <text x="75" y="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#717d96">PILOTO</text>
+    <text x="270" y="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#717d96">ESCUDERIA</text>
+    <text x="410" y="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#717d96">STATUS</text>
+    <text x="510" y="20" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#717d96" text-anchor="middle">PTS</text>
+  </g>
+
+  <!-- Row 1: Champion Antonelli -->
+  <g transform="translate(25, 122)">
+    <rect width="550" height="48" rx="8" fill="#19232a" stroke="#ffd700" stroke-width="1.5"/>
+    <circle cx="32" cy="24" r="13" fill="#ffd700"/>
+    <text x="32" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="11" fill="#000000" text-anchor="middle">1</text>
+
+    <text x="75" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff">Andrea Kimi Antonelli</text>
+    <text x="75" y="38" font-family="'Segoe UI', Roboto, sans-serif" font-size="9" fill="#00a19c">Mercedes-AMG PETRONAS F1 Team</text>
+
+    <rect x="270" y="15" width="85" height="18" rx="4" fill="#00a19c" fill-opacity="0.2"/>
+    <text x="312" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#00f0ff" text-anchor="middle">Mercedes</text>
+
+    <rect x="390" y="14" width="95" height="20" rx="4" fill="#ffd700" fill-opacity="0.2" stroke="#ffd700" stroke-width="0.8"/>
+    <text x="437" y="28" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="8.5" fill="#ffd700" text-anchor="middle">🏆 CAMPEÃO</text>
+
+    <text x="510" y="29" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="13" fill="#ffd700" text-anchor="middle">390</text>
+  </g>
+
+  <!-- Row 2: Verstappen -->
+  <g transform="translate(25, 176)">
+    <rect width="550" height="44" rx="8" fill="#121622" stroke="#222b3e"/>
+    <circle cx="32" cy="22" r="12" fill="#20293d"/>
+    <text x="32" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#8c97b2" text-anchor="middle">2</text>
+
+    <text x="75" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">Max Verstappen</text>
+    <text x="75" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#717d96">Oracle Red Bull Racing</text>
+
+    <rect x="270" y="13" width="85" height="18" rx="4" fill="#3671c6" fill-opacity="0.2"/>
+    <text x="312" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#6ba6ff" text-anchor="middle">Red Bull</text>
+
+    <rect x="390" y="13" width="95" height="18" rx="4" fill="#20293d"/>
+    <text x="437" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#8c97b2" text-anchor="middle">Vice-campeão</text>
+
+    <text x="510" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">279</text>
+  </g>
+
+  <!-- Row 3: Russell -->
+  <g transform="translate(25, 226)">
+    <rect width="550" height="44" rx="8" fill="#121622" stroke="#222b3e"/>
+    <circle cx="32" cy="22" r="12" fill="#20293d"/>
+    <text x="32" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#8c97b2" text-anchor="middle">3</text>
+
+    <text x="75" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">George Russell</text>
+    <text x="75" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#717d96">Mercedes-AMG PETRONAS F1 Team</text>
+
+    <rect x="270" y="13" width="85" height="18" rx="4" fill="#00a19c" fill-opacity="0.2"/>
+    <text x="312" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#00f0ff" text-anchor="middle">Mercedes</text>
+
+    <rect x="390" y="13" width="95" height="18" rx="4" fill="#20293d"/>
+    <text x="437" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#8c97b2" text-anchor="middle">3º Lugar</text>
+
+    <text x="510" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">262</text>
+  </g>
+
+  <!-- Row 4: Hamilton -->
+  <g transform="translate(25, 276)">
+    <rect width="550" height="44" rx="8" fill="#121622" stroke="#222b3e"/>
+    <circle cx="32" cy="22" r="12" fill="#20293d"/>
+    <text x="32" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#8c97b2" text-anchor="middle">4</text>
+
+    <text x="75" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">Lewis Hamilton</text>
+    <text x="75" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#717d96">Scuderia Ferrari HP</text>
+
+    <rect x="270" y="13" width="85" height="18" rx="4" fill="#e80020" fill-opacity="0.2"/>
+    <text x="312" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#ff4d4d" text-anchor="middle">Ferrari</text>
+
+    <rect x="390" y="13" width="95" height="18" rx="4" fill="#20293d"/>
+    <text x="437" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#8c97b2" text-anchor="middle">4º Lugar</text>
+
+    <text x="510" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">261</text>
+  </g>
+
+  <!-- Row 5: Leclerc -->
+  <g transform="translate(25, 326)">
+    <rect width="550" height="44" rx="8" fill="#121622" stroke="#222b3e"/>
+    <circle cx="32" cy="22" r="12" fill="#20293d"/>
+    <text x="32" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#8c97b2" text-anchor="middle">5</text>
+
+    <text x="75" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">Charles Leclerc</text>
+    <text x="75" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#717d96">Scuderia Ferrari HP</text>
+
+    <rect x="270" y="13" width="85" height="18" rx="4" fill="#e80020" fill-opacity="0.2"/>
+    <text x="312" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#ff4d4d" text-anchor="middle">Ferrari</text>
+
+    <rect x="390" y="13" width="95" height="18" rx="4" fill="#20293d"/>
+    <text x="437" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#8c97b2" text-anchor="middle">5º Lugar</text>
+
+    <text x="510" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">249</text>
+  </g>
+
+  <!-- Row 6: Norris -->
+  <g transform="translate(25, 376)">
+    <rect width="550" height="44" rx="8" fill="#121622" stroke="#222b3e"/>
+    <circle cx="32" cy="22" r="12" fill="#20293d"/>
+    <text x="32" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#8c97b2" text-anchor="middle">6</text>
+
+    <text x="75" y="22" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11.5" fill="#ffffff">Lando Norris</text>
+    <text x="75" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-size="8.5" fill="#717d96">McLaren Formula 1 Team</text>
+
+    <rect x="270" y="13" width="85" height="18" rx="4" fill="#ff8000" fill-opacity="0.2"/>
+    <text x="312" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#ff9933" text-anchor="middle">McLaren</text>
+
+    <rect x="390" y="13" width="95" height="18" rx="4" fill="#20293d"/>
+    <text x="437" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#8c97b2" text-anchor="middle">6º Lugar</text>
+
+    <text x="510" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">246</text>
+  </g>
+
+  <g transform="translate(25, 435)">
+    <text x="275" y="18" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#717d96" text-anchor="middle">
+      Tabela completa com mais de 20 pilotos extraída automaticamente em tempo real
+    </text>
+  </g>
+</svg>

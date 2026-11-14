@@ -137,7 +137,7 @@
         <p>F1 Paddock AI • Dados Oficiais Extraídos do Grande Prêmio • Atualizações 2026</p>
     </footer>
 
-    <!-- LIVE FILTER SCRIPT -->
+    <!-- LIVE FILTER & API KEYS AUTO-INJECT SCRIPT -->
     <script>
         const filterInput = document.getElementById('filter-input');
         const rows = document.querySelectorAll('#f1-standings-table tbody tr');
@@ -154,6 +154,21 @@
                 }
             });
         });
+
+        // Injeta automaticamente as chaves do Gemini salvas no localStorage nos formulários de análise
+        const savedKeys = localStorage.getItem('f1_paddock_gemini_keys');
+        if (savedKeys) {
+            document.querySelectorAll('form[action="/dados"]').forEach(form => {
+                let hiddenInput = form.querySelector('input[name="api-keys"]');
+                if (!hiddenInput) {
+                    hiddenInput = document.createElement('input');
+                    hiddenInput.type = 'hidden';
+                    hiddenInput.name = 'api-keys';
+                    form.appendChild(hiddenInput);
+                }
+                hiddenInput.value = savedKeys;
+            });
+        }
     </script>
 </body>
 </html>

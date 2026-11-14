@@ -84,7 +84,7 @@
             <div class="victory-gauge-widget">
                 <div class="gauge-header">
                     <span class="gauge-icon">⚡</span>
-                    <span class="gauge-title">CHANCE DE VITÓRIA / PERFORMANCE PREVISTA</span>
+                    <span class="gauge-title">CHANCE DE VITÓRIA / TÍTULO DA TEMPORADA</span>
                 </div>
                 
                 <div class="gauge-body">
@@ -97,21 +97,21 @@
                                 cx="60" 
                                 cy="60" 
                                 r="48" 
-                                style="--percent: {{ indicadores.chance_vitoria if indicadores else 50 }};"
+                                style="--percent: {{ indicadores.chance_vitoria if indicadores else 0 }};"
                             />
                         </svg>
                         <div class="speedometer-val-wrap">
-                            <span class="speedometer-number">{{ indicadores.chance_vitoria if indicadores else 50 }}%</span>
-                            <span class="speedometer-unit">POTENCIAL</span>
+                            <span class="speedometer-number">{{ indicadores.chance_vitoria if indicadores else 0 }}%</span>
+                            <span class="speedometer-unit">{% if indicadores and indicadores.chance_vitoria == 100 %}CAMPEÃO{% else %}FINALIZADO{% endif %}</span>
                         </div>
                     </div>
 
                     <div class="gauge-details">
                         <div class="gauge-bar-track">
-                            <div class="gauge-bar-fill" style="width: {{ indicadores.chance_vitoria if indicadores else 50 }}%;"></div>
+                            <div class="gauge-bar-fill" style="width: {{ indicadores.chance_vitoria if indicadores else 0 }}%;"></div>
                         </div>
                         <p class="gauge-sub">
-                            Probabilidade estimada combinando colocação no campeonato, histórico da escuderia e ritmo de corrida atual.
+                            {{ indicadores.descricao_chance if (indicadores and indicadores.descricao_chance) else 'Temporada finalizada com campeão mundial consagrado.' }}
                         </p>
                     </div>
                 </div>

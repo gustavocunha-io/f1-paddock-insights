@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0d13"/>
+      <stop offset="50%" stop-color="#121622"/>
+      <stop offset="100%" stop-color="#0a0c11"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#181d2a"/>
+      <stop offset="100%" stop-color="#11141e"/>
+    </linearGradient>
+    <linearGradient id="redAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff1e1e"/>
+      <stop offset="100%" stop-color="#e10600"/>
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#0099ff"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff9900"/>
+    </linearGradient>
+    <linearGradient id="greenAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#00cc66"/>
+    </linearGradient>
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="960" height="540" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid Lines -->
+  <g stroke="#ffffff" stroke-opacity="0.04" stroke-width="1">
+    <line x1="0" y1="90" x2="960" y2="90"/>
+    <line x1="0" y1="180" x2="960" y2="180"/>
+    <line x1="0" y1="270" x2="960" y2="270"/>
+    <line x1="0" y1="360" x2="960" y2="360"/>
+    <line x1="0" y1="450" x2="960" y2="450"/>
+    <line x1="160" y1="0" x2="160" y2="540"/>
+    <line x1="320" y1="0" x2="320" y2="540"/>
+    <line x1="480" y1="0" x2="480" y2="540"/>
+    <line x1="640" y1="0" x2="640" y2="540"/>
+    <line x1="800" y1="0" x2="800" y2="540"/>
+  </g>
+
+  <!-- Top Header Bar -->
+  <rect x="30" y="25" width="900" height="45" rx="8" fill="#151924" stroke="#252b3d" stroke-width="1"/>
+  <circle cx="55" cy="47.5" r="5" fill="#ff4d4d"/>
+  <circle cx="72" cy="47.5" r="5" fill="#ffcc00"/>
+  <circle cx="89" cy="47.5" r="5" fill="#00e676"/>
+  <text x="115" y="53" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="14" fill="#ffffff" letter-spacing="1">ARQUITETURA DE WEB SERVICES // F1 PADDOCK INSIGHTS</text>
+  <rect x="740" y="35" width="175" height="25" rx="4" fill="#e10600" fill-opacity="0.15" stroke="#e10600" stroke-width="1"/>
+  <text x="827" y="51" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="11" fill="#ff4d4d" text-anchor="middle">SISTEMA INTEGRADO</text>
+
+  <!-- CLIENT NODE (LEFT) -->
+  <g transform="translate(40, 110)">
+    <rect width="210" height="380" rx="12" fill="url(#cardGrad)" stroke="#2b3347" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="6" rx="3" fill="url(#cyanAccent)"/>
+    
+    <text x="105" y="35" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="14" fill="#00f0ff" text-anchor="middle">CLIENTE MOBILE-FIRST</text>
+    <text x="105" y="55" font-family="'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="11" fill="#8c97b2" text-anchor="middle">Interface Responsiva (Browser)</text>
+    
+    <!-- Phone graphic -->
+    <rect x="30" y="75" width="150" height="275" rx="16" fill="#0c0e14" stroke="#3d4760" stroke-width="2"/>
+    <rect x="65" y="85" width="80" height="5" rx="2.5" fill="#2a3042"/>
+    
+    <!-- Mini UI inside phone -->
+    <rect x="42" y="100" width="126" height="18" rx="4" fill="#e10600"/>
+    <text x="105" y="113" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="8.5" fill="#ffffff" text-anchor="middle">F1 PADDOCK AI</text>
+    
+    <rect x="42" y="122" width="126" height="20" rx="4" fill="#181d2a" stroke="#2c3449"/>
+    <text x="50" y="136" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#6d7996">🏎️ Piloto: Antonelli</text>
+    
+    <rect x="42" y="146" width="126" height="20" rx="4" fill="#181d2a" stroke="#2c3449"/>
+    <text x="50" y="160" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#6d7996">🎙️ Tom: Engenheiro</text>
+    
+    <rect x="42" y="170" width="126" height="22" rx="4" fill="#181d2a" stroke="#00e5ff" stroke-width="0.8"/>
+    <text x="50" y="184" font-family="'Segoe UI', Roboto, sans-serif" font-size="7.5" fill="#00e5ff">🔑 Chaves: [K1, K2...]</text>
+
+    <rect x="42" y="196" width="126" height="22" rx="4" fill="#00f0ff" fill-opacity="0.2" stroke="#00f0ff"/>
+    <text x="105" y="211" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="8" fill="#00f0ff" text-anchor="middle">POST /dados (Keys)</text>
+    
+    <!-- Mini Gauge display -->
+    <circle cx="105" cy="270" r="32" fill="none" stroke="#222838" stroke-width="6"/>
+    <circle cx="105" cy="270" r="32" fill="none" stroke="#00ff88" stroke-width="6" stroke-dasharray="201" stroke-dashoffset="0"/>
+    <text x="105" y="268" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12" fill="#ffffff" text-anchor="middle">100%</text>
+    <text x="105" y="280" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="7" fill="#00ff88" text-anchor="middle">CAMPEÃO</text>
+  </g>
+
+  <!-- FLASK BACKEND NODE (CENTER) -->
+  <g transform="translate(320, 110)">
+    <rect width="250" height="380" rx="12" fill="url(#cardGrad)" stroke="#38435f" stroke-width="2"/>
+    <rect x="0" y="0" width="250" height="6" rx="3" fill="url(#redAccent)"/>
+    
+    <rect x="85" y="25" width="80" height="24" rx="12" fill="#e10600" fill-opacity="0.2" stroke="#e10600"/>
+    <text x="125" y="41" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="11" fill="#ff4d4d" text-anchor="middle">BACK-END</text>
+    
+    <text x="125" y="70" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="16" fill="#ffffff" text-anchor="middle">FLASK ORCHESTRATOR</text>
+    <text x="125" y="88" font-family="'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="11" fill="#8c97b2" text-anchor="middle">paddock.py // Python 3.14</text>
+    
+    <!-- Components inside Flask -->
+    <rect x="20" y="105" width="210" height="52" rx="8" fill="#131722" stroke="#273044"/>
+    <text x="32" y="125" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#00f0ff">1. Router &amp; Controller</text>
+    <text x="32" y="143" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#a4b1cd">GET / • POST /dados • GET /classificacao</text>
+    
+    <rect x="20" y="168" width="210" height="58" rx="8" fill="#131722" stroke="#273044"/>
+    <text x="32" y="188" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#ffd700">2. Motor de Telemetria</text>
+    <text x="32" y="204" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#a4b1cd">calcular_indicadores_telemetria()</text>
+    <text x="32" y="217" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00ff88">Campeonato Encerrado: #1 = 100% | Outros = 0%</text>
+
+    <rect x="20" y="238" width="210" height="52" rx="8" fill="#131722" stroke="#273044"/>
+    <text x="32" y="256" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10.5" fill="#00e5ff">3. Rodízio de Chaves &amp; Fallback</text>
+    <text x="32" y="272" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" fill="#a4b1cd">Pool dinâmico de API Keys do input</text>
+    <text x="32" y="284" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#00ff88">Zero dependência de .env (100% seguro)</text>
+    
+    <rect x="20" y="302" width="210" height="56" rx="8" fill="#131722" stroke="#273044"/>
+    <text x="32" y="322" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#c084fc">4. Renderização Jinja2</text>
+    <text x="32" y="340" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#a4b1cd">Gera HTML dinâmico com Markdown AI</text>
+  </g>
+
+  <!-- 3 WEB SERVICES NODES (RIGHT) -->
+  <!-- Service 1: OpenF1 API -->
+  <g transform="translate(640, 105)">
+    <rect width="280" height="110" rx="10" fill="url(#cardGrad)" stroke="#2b3347" stroke-width="1.5"/>
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="url(#cyanAccent)"/>
+    <circle cx="28" cy="28" r="14" fill="#00f0ff" fill-opacity="0.15"/>
+    <text x="28" y="33" font-size="14" text-anchor="middle">📡</text>
+    
+    <text x="50" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="13" fill="#ffffff">OPENF1 REST API</text>
+    <rect x="185" y="14" width="80" height="18" rx="4" fill="#00f0ff" fill-opacity="0.15"/>
+    <text x="225" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00f0ff" text-anchor="middle">API PÚBLICA</text>
+    
+    <text x="50" y="44" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#8c97b2">api.openf1.org/v1/drivers</text>
+    <text x="20" y="68" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Dados oficiais dos pilotos e escuderias</text>
+    <text x="20" y="84" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Fotos oficiais, número do carro e hex da equipe</text>
+    <text x="20" y="100" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00f0ff">Payload JSON Estruturado</text>
+  </g>
+
+  <!-- Service 2: BeautifulSoup Scraping -->
+  <g transform="translate(640, 240)">
+    <rect width="280" height="115" rx="10" fill="url(#cardGrad)" stroke="#2b3347" stroke-width="1.5"/>
+    <rect x="0" y="0" width="6" height="115" rx="3" fill="url(#goldAccent)"/>
+    <circle cx="28" cy="28" r="14" fill="#ffd700" fill-opacity="0.15"/>
+    <text x="28" y="33" font-size="14" text-anchor="middle">🌐</text>
+    
+    <text x="50" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="13" fill="#ffffff">BEAUTIFULSOUP SCRAPING</text>
+    <rect x="185" y="14" width="80" height="18" rx="4" fill="#ffd700" fill-opacity="0.15"/>
+    <text x="225" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#ffd700" text-anchor="middle">GRANDE PRÊMIO</text>
+    
+    <text x="50" y="44" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#8c97b2">grandepremio.com/br/f1/...</text>
+    <text x="20" y="68" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Raspagem em tempo real de matérias do piloto</text>
+    <text x="20" y="84" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Tabela geral oficial de classificação 2026</text>
+    <text x="20" y="102" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#ffd700">Extração HTML via Requests + Regex</text>
+  </g>
+
+  <!-- Service 3: Google Gemini AI -->
+  <g transform="translate(640, 380)">
+    <rect width="280" height="110" rx="10" fill="url(#cardGrad)" stroke="#2b3347" stroke-width="1.5"/>
+    <rect x="0" y="0" width="6" height="110" rx="3" fill="url(#redAccent)"/>
+    <circle cx="28" cy="28" r="14" fill="#ff4d4d" fill-opacity="0.15"/>
+    <text x="28" y="33" font-size="14" text-anchor="middle">🧠</text>
+    
+    <text x="50" y="26" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="13" fill="#ffffff">GOOGLE GEMINI AI</text>
+    <rect x="185" y="14" width="80" height="18" rx="4" fill="#ff4d4d" fill-opacity="0.15"/>
+    <text x="225" y="27" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#ff4d4d" text-anchor="middle">LLM SERVICE</text>
+    
+    <text x="50" y="44" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#8c97b2">SDK: google-genai (gemini-3.5-flash-lite)</text>
+    <text x="20" y="68" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Alternância de chaves Round-Robin</text>
+    <text x="20" y="84" font-family="'Segoe UI', Roboto, sans-serif" font-size="10" fill="#cbd5e1">• Fallback automático em cota esgotada</text>
+    <text x="20" y="100" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="9" fill="#00e5ff">Chaves via UI • Seguro para GitHub</text>
+  </g>
+
+  <!-- CONNECTING ARROWS -->
+  <!-- Client to Flask -->
+  <path d="M250 250 L320 250" stroke="#00f0ff" stroke-width="2" stroke-dasharray="4,4"/>
+  <polygon points="318,246 326,250 318,254" fill="#00f0ff"/>
+  <rect x="255" y="235" width="60" height="16" rx="3" fill="#0c0e14" stroke="#00f0ff" stroke-width="0.8"/>
+  <text x="285" y="247" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" fill="#00f0ff" text-anchor="middle">HTTP POST</text>
+
+  <!-- Flask back to Client -->
+  <path d="M320 330 L250 330" stroke="#00ff88" stroke-width="2"/>
+  <polygon points="254,326 246,330 254,334" fill="#00ff88"/>
+  <rect x="255" y="320" width="60" height="16" rx="3" fill="#0c0e14" stroke="#00ff88" stroke-width="0.8"/>
+  <text x="285" y="332" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" font-weight="700" fill="#00ff88" text-anchor="middle">HTML/UI</text>
+
+  <!-- Flask to OpenF1 -->
+  <path d="M570 160 L640 160" stroke="#00f0ff" stroke-width="2"/>
+  <polygon points="636,156 644,160 636,164" fill="#00f0ff"/>
+
+  <!-- Flask to Scraping -->
+  <path d="M570 300 L640 300" stroke="#ffd700" stroke-width="2"/>
+  <polygon points="636,296 644,300 636,304" fill="#ffd700"/>
+
+  <!-- Flask to Gemini -->
+  <path d="M570 435 L640 435" stroke="#ff4d4d" stroke-width="2"/>
+  <polygon points="636,431 644,435 636,439" fill="#ff4d4d"/>
+
+  <!-- Bottom status note -->
+  <text x="480" y="522" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="11" fill="#717d96" text-anchor="middle">
+    F1 PADDOCK INSIGHTS • TRABALHO PRÁTICO INDIVIDUAL DE WEB SERVICES • ENGENHARIA DE SOFTWARE
+  </text>
+</svg>

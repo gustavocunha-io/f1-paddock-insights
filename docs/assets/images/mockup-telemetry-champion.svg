@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 680" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mercedesGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00a19c"/>
+      <stop offset="100%" stop-color="#004d49"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141822"/>
+      <stop offset="100%" stop-color="#0e1118"/>
+    </linearGradient>
+    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="100%" stop-color="#00f0ff"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ffaa00"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Mobile Screen Shell -->
+  <rect width="420" height="680" rx="36" fill="#090b10" stroke="#252c3d" stroke-width="3"/>
+  
+  <!-- Notch & Status Bar -->
+  <rect x="135" y="10" width="150" height="20" rx="10" fill="#141722"/>
+  <circle cx="255" cy="20" r="4" fill="#1e2436"/>
+  <rect x="180" y="18" width="40" height="4" rx="2" fill="#1e2436"/>
+  <text x="40" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#8c97b2">14:04</text>
+  <text x="360" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-size="11" fill="#8c97b2">5G 🔋</text>
+
+  <!-- Top App Header -->
+  <rect x="20" y="45" width="380" height="50" rx="10" fill="#12151f" stroke="#1f2535" stroke-width="1"/>
+  <rect x="35" y="55" width="32" height="30" rx="6" fill="#e10600"/>
+  <text x="51" y="75" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="15" fill="#ffffff" text-anchor="middle">F1</text>
+  <text x="78" y="70" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="13" fill="#ffffff">PADDOCK <tspan fill="#e10600">AI</tspan></text>
+  <text x="78" y="84" font-family="'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8" fill="#717d96" letter-spacing="1">TELEMETRIA &amp; ESTRATÉGIA</text>
+  
+  <rect x="285" y="58" width="100" height="24" rx="12" fill="#00e676" fill-opacity="0.15" stroke="#00e676" stroke-width="1"/>
+  <circle cx="298" cy="70" r="3.5" fill="#00e676"/>
+  <text x="342" y="74" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#00e676" text-anchor="middle">PIT WALL LIVE</text>
+
+  <!-- DRIVER HERO CARD (ANDREA KIMI ANTONELLI - CAMPEÃO 2026) -->
+  <g transform="translate(20, 110)">
+    <rect width="380" height="520" rx="16" fill="url(#cardBg)" stroke="#00a19c" stroke-width="2"/>
+    <rect x="0" y="0" width="380" height="5" rx="2.5" fill="url(#mercedesGrad)"/>
+
+    <!-- Watermark Driver Number -->
+    <text x="350" y="110" font-family="'Impact', 'Segoe UI', sans-serif" font-weight="900" font-size="105" fill="#ffffff" fill-opacity="0.04" text-anchor="end">#12</text>
+
+    <!-- CHAMPION BANNER ALERT -->
+    <rect x="15" y="16" width="350" height="34" rx="8" fill="#00e676" fill-opacity="0.18" stroke="#00e676" stroke-width="1.2"/>
+    <circle cx="35" cy="33" r="6" fill="#00e676"/>
+    <text x="35" y="36" font-size="9" text-anchor="middle" fill="#000000">🏆</text>
+    <text x="50" y="37" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#00ff88" letter-spacing="0.5">
+      CAMPEÃO CONFIRMADO // TÍTULO CONQUISTADO
+    </text>
+
+    <!-- Driver Photo & Info -->
+    <g transform="translate(15, 65)">
+      <!-- Avatar container -->
+      <rect width="84" height="95" rx="12" fill="#1b202e" stroke="#00a19c" stroke-width="1.5"/>
+      <!-- Driver helmet / silhouette -->
+      <circle cx="42" cy="40" r="24" fill="#00a19c" fill-opacity="0.4"/>
+      <path d="M25 65 C25 50 30 45 42 45 C54 45 59 50 59 65 Z" fill="#00a19c" fill-opacity="0.6"/>
+      <text x="42" y="84" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="10" fill="#00f0ff" text-anchor="middle">#12</text>
+
+      <!-- Details -->
+      <g transform="translate(96, 5)">
+        <rect width="160" height="20" rx="4" fill="#00a19c" fill-opacity="0.2"/>
+        <line x1="0" y1="0" x2="0" y2="20" stroke="#00a19c" stroke-width="4"/>
+        <text x="10" y="14" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#00f0ff">MERCEDES-AMG F1</text>
+        <rect x="170" y="0" width="36" height="20" rx="4" fill="#1f2535"/>
+        <text x="188" y="14" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="10" fill="#8c97b2" text-anchor="middle">ITA</text>
+
+        <text x="0" y="44" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="19" fill="#ffffff">Andrea K. Antonelli</text>
+
+        <rect x="0" y="55" width="240" height="32" rx="6" fill="#111520" stroke="#22293a"/>
+        <text x="15" y="70" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#717d96">POSIÇÃO</text>
+        <text x="15" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#00ff88">1º no Mundial</text>
+
+        <text x="100" y="70" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#717d96">PONTOS</text>
+        <text x="100" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#ffffff">390 pts</text>
+
+        <text x="180" y="70" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#717d96">CARRO</text>
+        <text x="180" y="82" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#00f0ff">W17 E-Perf</text>
+      </g>
+    </g>
+
+    <!-- VICTORY GAUGE WIDGET (100% FOR CHAMPION) -->
+    <g transform="translate(15, 180)">
+      <rect width="350" height="150" rx="12" fill="#0d1017" stroke="#232a3c" stroke-width="1.2"/>
+      
+      <!-- Gauge Title -->
+      <text x="15" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#ffd700" letter-spacing="1">
+        ⚡ CHANCE DE VITÓRIA / TÍTULO DA TEMPORADA
+      </text>
+
+      <!-- Circular Speedometer SVG (100% Complete) -->
+      <g transform="translate(20, 36)">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#1a202d" stroke-width="8"/>
+        <!-- Full 100% circumference: 2 * pi * 40 ≈ 251 -->
+        <circle cx="48" cy="48" r="40" fill="none" stroke="url(#gaugeGrad)" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 48 48)"/>
+        <text x="48" y="47" font-family="'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="18" fill="#ffffff" text-anchor="middle">100%</text>
+        <text x="48" y="60" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="8" fill="#00ff88" text-anchor="middle">CAMPEÃO</text>
+      </g>
+
+      <!-- Gauge Details & Subtitle -->
+      <g transform="translate(130, 42)">
+        <rect width="205" height="10" rx="5" fill="#1b2130"/>
+        <rect width="205" height="10" rx="5" fill="url(#gaugeGrad)"/>
+        
+        <text x="0" y="32" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#00ff88">
+          Campeonato Finalizado!
+        </text>
+        <text x="0" y="50" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" fill="#a4b1cd">
+          Piloto consagrado Campeão Mundial
+        </text>
+        <text x="0" y="64" font-family="'Segoe UI', Roboto, sans-serif" font-size="9.5" fill="#a4b1cd">
+          da temporada com 390 pontos acumulados.
+        </text>
+        <rect x="0" y="74" width="140" height="18" rx="4" fill="#ffd700" fill-opacity="0.15"/>
+        <text x="70" y="87" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#ffd700" text-anchor="middle">
+          🏆 TÍTULO CONFIRMADO
+        </text>
+      </g>
+    </g>
+
+    <!-- Mini Radio AI Box Preview -->
+    <g transform="translate(15, 345)">
+      <rect width="350" height="110" rx="10" fill="#121622" stroke="#252d3f" stroke-width="1"/>
+      <rect x="15" y="12" width="22" height="22" rx="4" fill="#e10600"/>
+      <text x="26" y="27" font-size="12" text-anchor="middle">🎙️</text>
+      <text x="45" y="24" font-family="'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="10" fill="#ffffff">PIT WALL // COMUNICAÇÃO DE RÁDIO</text>
+      <text x="45" y="34" font-family="'Segoe UI', Roboto, sans-serif" font-size="8" fill="#717d96">DESCRIPTOGRAFADO VIA GOOGLE GEMINI</text>
+
+      <rect x="15" y="44" width="320" height="54" rx="6" fill="#0b0e15"/>
+      <text x="25" y="60" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#00f0ff">[PIT WALL] • ENGENHEIRO DE PISTA:</text>
+      <text x="25" y="75" font-family="'Segoe UI', Roboto, sans-serif" font-size="9" fill="#cbd5e1">"Kimi, P1 confirmado no campeonato. Excelente trabalho</text>
+      <text x="25" y="88" font-family="'Segoe UI', Roboto, sans-serif" font-size="9" fill="#cbd5e1">de preservação de pneus e consistência de pontuação."</text>
+    </g>
+
+    <!-- Action buttons -->
+    <rect x="15" y="470" width="170" height="36" rx="8" fill="#e10600"/>
+    <text x="100" y="493" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#ffffff" text-anchor="middle">🏎️ Analisar Outro</text>
+
+    <rect x="195" y="470" width="170" height="36" rx="8" fill="#1c2232" stroke="#2c364c"/>
+    <text x="280" y="493" font-family="'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="11" fill="#cbd5e1" text-anchor="middle">🏆 Classificação</text>
+  </g>
+</svg>

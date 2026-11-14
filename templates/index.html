@@ -132,6 +132,53 @@
                     </div>
                 </div>
 
+                <!-- API KEY(S) & ROTATION INPUT -->
+                <div class="form-group api-key-section">
+                    <div class="label-row">
+                        <label for="api-keys" class="form-label">
+                            <span class="label-icon">🔑</span> CHAVE(S) DA API GOOGLE GEMINI:
+                        </label>
+                        <span class="label-hint" id="key-counter-badge">1 ou mais chaves (rodízio automático)</span>
+                    </div>
+
+                    <div class="api-key-input-wrapper">
+                        <div class="key-input-container">
+                            <input 
+                                type="password" 
+                                name="api-keys" 
+                                id="api-keys" 
+                                placeholder="Insira a chave (ex: AIzaSy...) ou várias separadas por vírgula" 
+                                autocomplete="off"
+                                class="f1-input key-input"
+                            >
+                            <button type="button" id="toggle-key-visibility" class="toggle-key-btn" title="Mostrar/Ocultar chave(s)">
+                                <span id="toggle-key-icon">👁️</span>
+                            </button>
+                        </div>
+
+                        <div class="key-status-bar">
+                            <div class="key-status-left">
+                                <span class="status-indicator-dot" id="key-dot"></span>
+                                <span class="status-indicator-text" id="key-status-text">Verificando chaves...</span>
+                            </div>
+                            <div class="key-rotation-info">
+                                <button type="button" id="clear-keys-btn" class="clear-keys-btn" title="Resetar e remover chaves salvas" style="display: none;">
+                                    🔄 Resetar Chaves
+                                </button>
+                                <span class="rotation-badge" id="rotation-badge">🔄 Rodízio Disponível</span>
+                            </div>
+                        </div>
+
+                        <div class="key-help-box">
+                            <span class="help-icon">💡</span>
+                            <div class="help-content">
+                                <p><strong>Rodízio Inteligente de Chaves:</strong> Insira múltiplas chaves separadas por vírgula (<code>,</code>) ou quebra de linha. O sistema distribuirá automaticamente as chamadas (Round-Robin) e fará fallback para a próxima chave caso a cota de alguma seja atingida.</p>
+                                <p class="help-subnote">Sua chave é salva com segurança apenas no seu navegador (localStorage).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- SUBMIT BUTTON -->
                 <div class="form-action">
                     <button type="submit" id="submit-btn" class="f1-submit-btn">
@@ -211,6 +258,92 @@
                 document.querySelectorAll('.tone-card').forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
             });
+        });
+
+        // API Key local storage & dynamic rotation counter
+        const keyInput = document.getElementById('api-keys');
+        const toggleKeyBtn = document.getElementById('toggle-key-visibility');
+        const toggleKeyIcon = document.getElementById('toggle-key-icon');
+        const keyDot = document.getElementById('key-dot');
+        const keyStatusText = document.getElementById('key-status-text');
+        const keyCounterBadge = document.getElementById('key-counter-badge');
+        const rotationBadge = document.getElementById('rotation-badge');
+        const clearKeysBtn = document.getElementById('clear-keys-btn');
+
+        const STORAGE_KEY = 'f1_paddock_gemini_keys';
+
+        function parseKeys(val) {
+            if (!val) return [];
+            return val.split(/[,;\n\r\t]+/).map(k => k.trim()).filter(k => k.length > 0);
+        }
+
+        function updateKeyStatus() {
+            const val = keyInput.value.trim();
+            const keys = parseKeys(val);
+            const count = keys.length;
+
+            if (count === 0) {
+                keyDot.className = 'status-indicator-dot dot-empty';
+                keyStatusText.textContent = 'Nenhuma chave configurada (insira para habilitar a IA)';
+                keyCounterBadge.textContent = 'Chave necessária';
+                rotationBadge.textContent = '⚪ Sem chaves';
+                rotationBadge.className = 'rotation-badge badge-idle';
+                if (clearKeysBtn) clearKeysBtn.style.display = 'none';
+            } else if (count === 1) {
+                keyDot.className = 'status-indicator-dot dot-active';
+                keyStatusText.textContent = '1 chave configurada e ativa na sessão';
+                keyCounterBadge.textContent = '1 chave ativa';
+                rotationBadge.textContent = '⚡ Chave Única';
+                rotationBadge.className = 'rotation-badge badge-single';
+                if (clearKeysBtn) clearKeysBtn.style.display = 'inline-block';
+            } else {
+                keyDot.className = 'status-indicator-dot dot-rotating';
+                keyStatusText.textContent = `${count} chaves ativas em rodízio automático`;
+                keyCounterBadge.textContent = `${count} chaves no pool`;
+                rotationBadge.textContent = `🔄 Rodízio Ativo (${count}x)`;
+                rotationBadge.className = 'rotation-badge badge-multi';
+                if (clearKeysBtn) clearKeysBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Load saved keys from localStorage
+        const savedKeys = localStorage.getItem(STORAGE_KEY);
+        if (savedKeys) {
+            keyInput.value = savedKeys;
+        }
+        updateKeyStatus();
+
+        // Listen for input changes
+        keyInput.addEventListener('input', () => {
+            localStorage.setItem(STORAGE_KEY, keyInput.value.trim());
+            updateKeyStatus();
+        });
+
+        // Reset/Clear keys button
+        if (clearKeysBtn) {
+            clearKeysBtn.addEventListener('click', () => {
+                if (confirm('Deseja realmente resetar e remover as chaves da API salvas?')) {
+                    keyInput.value = '';
+                    localStorage.removeItem(STORAGE_KEY);
+                    fetch('/limpar-chaves', { method: 'POST' }).then(() => {
+                        updateKeyStatus();
+                        keyStatusText.textContent = 'Chaves resetadas! Insira uma nova chave para continuar.';
+                    }).catch(() => {
+                        updateKeyStatus();
+                    });
+                }
+            });
+        }
+
+        // Toggle visibility
+        toggleKeyBtn.addEventListener('click', () => {
+            if (keyInput.type === 'password') {
+                keyInput.type = 'text';
+                toggleKeyIcon.textContent = '🙈';
+            } else {
+                keyInput.type = 'password';
+                toggleKeyIcon.textContent = '👁️';
+            }
         });
 
         // Form submit loading animation
