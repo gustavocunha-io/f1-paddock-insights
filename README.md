@@ -133,22 +133,6 @@ Acesse no seu navegador: **`http://localhost:5000`**
 
 ---
 
-## ⚙️ Como Ativar o GitHub Pages no Repositório
-
-Para publicar ou atualizar o site estático no GitHub Pages:
-
-1. Acesse o repositório no GitHub: `https://github.com/gustavocunha-io/f1-paddock-insights`
-2. Clique na aba **Settings** (Configurações)
-3. No menu lateral esquerdo, clique em **Pages**
-4. Em **Build and deployment**:
-   - **Source:** Selecione `Deploy from a branch`
-   - **Branch:** Selecione `main` e a pasta `/docs`
-   - Clique em **Save**
-5. Em poucos instantes o site estará no ar em:  
-   `https://gustavocunha-io.github.io/f1-paddock-insights/`
-
----
-
 ## 📁 Estrutura de Diretórios
 
 ```
